@@ -9,6 +9,7 @@ const indexRouter = require("./routes/index");
 const userRouter = require("./routes/users");
 const buildRouter = require("./routes/builds");
 const commentRouter = require("./routes/comments");
+const testRouter = require("./routes/apitest");
 
 app.use(bearerToken());
 app.use(morgan("dev"));
@@ -20,6 +21,7 @@ app.use("/", indexRouter);
 app.use("/users", userRouter);
 app.use("/builds", buildRouter);
 app.use("/comments", commentRouter);
+app.use("/test", testRouter);
 
 app.use(express.static(path.join(__dirname, "public")));
 

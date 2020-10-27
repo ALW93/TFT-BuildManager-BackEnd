@@ -1,3 +1,9 @@
+function r(o) {
+  o.createdAt = new Date();
+  o.updatedAt = new Date();
+  return o;
+}
+
 const Champions = [
   {
     name: "Aatrox",
@@ -291,4 +297,10 @@ const Champions = [
   },
 ];
 
-export default Champions;
+const seedChampions = () => Champions.map((c) => r(c));
+
+const lol = () => Champions.map((t, i) => console.log(t.name + ":" + (i + 1) + ","))
+
+console.log(lol())
+
+module.exports = seedChampions;

@@ -1,3 +1,9 @@
+function r(o) {
+  o.createdAt = new Date();
+  o.updatedAt = new Date();
+  return o;
+}
+
 const traits = [
   {
     name: "Adept",
@@ -8,7 +14,6 @@ const traits = [
   },
   {
     name: "Assassin",
-    innate: "At the start of combat, Assassins leap to the enemy backline.",
     description:
       "Assassins gain bonus Critical Strike Damage and Chance, and their spells can critically strike.",
     type: "class",
@@ -43,7 +48,6 @@ const traits = [
   },
   {
     name: "Duelist",
-    innate: "Duelists gain bonus Movement Speed.",
     description: "Duelists' attacks grant Attack Speed.",
     type: "class",
     image: "./set4/traits/duelist.png",
@@ -130,7 +134,6 @@ const traits = [
   },
   {
     name: "Shade",
-    innate: "When combat starts, Shades teleport to the enemy backline.",
     description:
       "Every third attack Shades dip into the shadows, stealthing and causing their next basic attack to deal bonus magic damage.",
     type: "class",
@@ -179,4 +182,8 @@ const traits = [
   },
 ];
 
-export default traits;
+const seedTraits = () => traits.map((t) => r(t));
+
+const lol = () => traits.map((t, i) => console.log(t.name + ":" + (i + 1) + ","))
+
+module.exports = seedTraits;
