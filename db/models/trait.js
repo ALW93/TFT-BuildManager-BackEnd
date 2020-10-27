@@ -1,18 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const trait = sequelize.define('trait', {
+  const Trait = sequelize.define('Trait', {
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
     type: DataTypes.STRING,
     image: DataTypes.STRING
   }, {});
-  trait.associate = function (models) {
-    trait.belongsToMany(models.champion, {
-      as: "champions",
-      through: models.origin,
-      foreignKey: "traitId",
-      otherKey: "championId"
-    })
+  Trait.associate = function(models) {
+    // associations can be defined here
   };
-  return trait;
+  return Trait;
 };

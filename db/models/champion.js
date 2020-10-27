@@ -1,17 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const champion = sequelize.define('champion', {
+  const Champion = sequelize.define('Champion', {
     name: DataTypes.STRING,
     cost: DataTypes.INTEGER,
     image: DataTypes.STRING
   }, {});
-  champion.associate = function (models) {
-    champion.belongsToMany(models.trait, {
-      as: "traits",
-      through: models.origin,
-      foreignKey: "championId",
-      otherKey: "traitId"
-    })
+  Champion.associate = function(models) {
+    // associations can be defined here
   };
-  return champion;
+  return Champion;
 };

@@ -1,13 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const component = sequelize.define('component', {
+  const Component = sequelize.define('Component', {
     name: DataTypes.STRING,
     acronym: DataTypes.STRING,
     description: DataTypes.TEXT,
     image: DataTypes.STRING
   }, {});
-  component.associate = function(models) {
+  Component.associate = function(models) {
     // associations can be defined here
   };
-  return component;
+  return Component;
 };
