@@ -9,13 +9,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       buildId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       championId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       carry: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,

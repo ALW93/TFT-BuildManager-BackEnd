@@ -9,13 +9,28 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       buildId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Builds",
+          key: "id",
+        },
       },
       championId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Champions",
+          key: "id",
+        },
       },
       itemId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Items",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,
