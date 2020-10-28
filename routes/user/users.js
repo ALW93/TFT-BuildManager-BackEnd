@@ -24,6 +24,7 @@ const validateEmailAndPassword = [
   check("password")
     .exists({ checkFalsy: true })
     .withMessage("Please enter a Password."),
+  handleValidationErrors,
 ];
 
 // POST/user No Create User
@@ -170,9 +171,33 @@ userRouter.get(
 // POST/user/:id/bookmarks	Yes	Create Bookmark
 userRouter.post(
   "/:id/bookmarks",
+  requireAuth,
   asyncHandler(async (req, res) => {
-    const newBookmark = await Bookmark.create();
+    const { buildId } = req.body;
+    await Bookmark.create(r({ buildId, followerId: req.params.id }));
+    res.status(201).send("New Bookmark Successfully Added!");
   })
 );
+
 // DELETE/user/:id/bookmarks	Yes	Delete Bookmark
+userRouter.delete(
+  "/:id/bookmarks",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { buildId } = req.body;
+    const removeBookmark = await Bookmark.findOne({
+      where: {
+        buildId: buildId,
+        followerId: req.params.id,
+      },
+    });
+    await removeBookmark.destroy({
+      where: {
+        removeBookmark,
+      },
+    });
+    res.status(201).send("Bookmark Successfully Removed!");
+  })
+);
+
 module.exports = userRouter;
