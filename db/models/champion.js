@@ -17,6 +17,30 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "championId",
       otherKey: "traitId",
     });
+    Champion.belongsToMany(models.Item, {
+      as: "default_equipment",
+      through: models.item_champion,
+      foreignKey: "championId",
+      otherKey: "itemId",
+    });
+    Champion.belongsToMany(models.Build, {
+      as: "team",
+      through: models.build_champion,
+      foreignKey: "championId",
+      otherKey: "buildId",
+    })
+    Champion.belongsToMany(models.Build, {
+      as: "item_customization",
+      through: models.build_champion_item,
+      foreignKey: "championId",
+      otherKey: "buildId",
+    });
+    Champion.belongsToMany(models.Item, {
+      as: "item_customization",
+      through: models.build_champion_item,
+      foreignKey: "championId",
+      otherKey: "itemId",
+    });
   };
   return Champion;
 };
