@@ -5,8 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     cost: DataTypes.INTEGER,
     image: DataTypes.STRING
   }, {});
-  Champion.associate = function(models) {
-    // associations can be defined here
+  Champion.associate = function (models) {
+    Champion.belongsToMany(models.Trait, {
+      as: "traits",
+      through: trait_champions,
+      foreignKey: "championId",
+      otherKey: "traitId"
+    })
   };
   return Champion;
 };
