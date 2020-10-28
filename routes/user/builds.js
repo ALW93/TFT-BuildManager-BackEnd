@@ -1,5 +1,6 @@
 const express = require("express");
 const buildRouter = express.Router();
+const { requireAuth } = require("../security");
 const { asyncHandler, handleValidationErrors } = require("../utility");
 const { Build, Comment } = require("../../db/models");
 
@@ -9,9 +10,9 @@ function r(o) {
   return o;
 }
 
-// Create
+// POST/builds	Yes	Create Build (WIP)
 buildRouter.post(
-  "/",
+  "/", requireAuth,
   asyncHandler(async (req, res) => {
     try {
       const build = await Build.create(r(req.body));
@@ -23,7 +24,53 @@ buildRouter.post(
   })
 );
 
-// Read
+// PUT/builds/:id	Yes	Edit Build (WIP)
+buildRouter.put(
+  "/:id", requireAuth,
+  asyncHandler(async (req, res) => {
+    const build = await Build.findByPk(req.params.id);
+
+    if (!build) {
+      next();
+    } else {
+      build = req.body;
+      await build.save();
+      res.send("Build Edited!");
+    }
+  })
+);
+
+// DELETE/builds/:id	Yes	Delete Build (WIP)
+buildRouter.delete(
+  "/:id", requireAuth,
+  asyncHandler(async (req, res) => {
+    const build = await Build.findByPk(req.params.id);
+    const buildComments = await Comment.findAll({
+      where: {
+        buildId: req.params.id,
+      },
+    });
+
+    if (!build) {
+      next();
+    } else {
+      await build.destroy({
+        where: {
+          build,
+        },
+      });
+      buildComments.map(async (c) => {
+        await c.destroy({
+          where: c,
+        });
+      });
+
+      res.send("Build Deleted!");
+    }
+  })
+);
+
+// GET/builds/:id	No	Finds Specific Build (Includes Team & Custom Itemization) (WIP)
 buildRouter.get(
   "/id/:id",
   asyncHandler(async (req, res, next) => {
@@ -51,6 +98,8 @@ buildRouter.get(
   })
 );
 
+// GET	/builds/traits/:id	No	Retrieve all Builds that Contain a Certain Trait (WIP)
+
 // GET/builds/meta No	Retrieve Meta Builds
 buildRouter.get(
   "/meta",
@@ -64,50 +113,72 @@ buildRouter.get(
   })
 );
 
-// Update
-buildRouter.put(
-  "/:id",
-  asyncHandler(async (req, res) => {
-    const build = await Build.findByPk(req.params.id);
+// GET/build/:id/comments	No	Read Comments for a Build
+buildRouter.get("/:id/comments", asyncHandler(async (req, res) => {
+  const comments = await Comment.findAll({
+    where: {
+      buildId: req.params.id
+    }
+  })
+  res.json(comments);
+}));
 
-    if (!build) {
+// POST/build/:id/comments	Yes	Create Comment
+buildRouter.post(
+  "/:id/comments", requireAuth,
+  asyncHandler(async (req, res) => {
+    const { message, userId } = req.body;
+    // userId: req.user.id (Set Up when Login Works)
+
+    const comment = await Comment.create(
+      r({ message, userId, buildId: req.params.id })
+    );
+
+    res.send("Comment Successfully Posted!");
+  })
+);
+
+// PUT/build/:id/comments	Yes	Edit Comment
+buildRouter.put(
+  "/:id/comments/:cid", requireAuth,
+  asyncHandler(async (req, res) => {
+    const { editMessage } = req.body;
+    const comment = await Comment.findByPk({
+      where: {
+        id: cid
+      }
+    });
+    if (!comment) {
       next();
     } else {
-      build = req.body;
-      await build.save();
-      res.send("Build Edited!");
+      comment.message = editMessage
+      res.send(`Comment Edited:${editMessage}`);
     }
   })
 );
 
-// Delete
+// DELETE/build/:id/comments	Yes	Delete Comment
 buildRouter.delete(
-  "/:id",
+  "/:id/comments/:cid",
   asyncHandler(async (req, res) => {
-    const build = await Build.findByPk(req.params.id);
-    const buildComments = await Comment.findAll({
+    const comment = await Comment.findByPk({
       where: {
-        buildId: req.params.id,
-      },
+        id: cid
+      }
     });
 
-    if (!build) {
+    if (!comment) {
       next();
     } else {
-      await build.destroy({
+      await comment.destroy({
         where: {
-          build,
+          comment,
         },
       });
-      buildComments.map(async (c) => {
-        await c.destroy({
-          where: c,
-        });
-      });
-
-      res.send("Build Deleted!");
+      res.send(`Comment #${cid}: "${comment}" => Successfully Deleted!`);
     }
   })
 );
+
 
 module.exports = buildRouter;
