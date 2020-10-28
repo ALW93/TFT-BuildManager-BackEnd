@@ -1,4 +1,7 @@
 "use strict";
+
+const bcrypt = require("bcryptjs");
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     "User",
@@ -24,13 +27,28 @@ module.exports = (sequelize, DataTypes) => {
       through: models.Follow,
       foreignKey: "userId",
       otherKey: "followerId",
-    })
+    });
     User.belongsToMany(models.User, {
       as: "followers",
       through: models.Follow,
       foreignKey: "followerId",
       otherKey: "userId",
-    })
+    });
   };
+
+  User.prototype.validatePassword = function (password) {
+    return bcrypt.compareSync(password, this.hashedPassword.toString());
+  };
+
+  User.prototype.toSafeObject = function () {
+    return {
+      createdAt: this.createdAt,
+      email: this.email,
+      id: this.id,
+      username: this.name,
+      updatedAt: this.updatedAt,
+    };
+  };
+
   return User;
 };

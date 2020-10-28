@@ -12,6 +12,10 @@ function r(o) {
   return o;
 }
 
+const validateUsername = check("username")
+  .exists({ checkFalsy: true })
+  .withMessage("Please enter a Username.");
+
 const validateEmailAndPassword = [
   check("email")
     .exists({ checkFalsy: true })
@@ -20,34 +24,21 @@ const validateEmailAndPassword = [
   check("password")
     .exists({ checkFalsy: true })
     .withMessage("Please enter a Password."),
-  handleValidationErrors,
 ];
 
 // POST/user No Create User
 userRouter.post(
   "/",
-  check("username")
-    .exists({ checkFalsy: true })
-    .withMessage(
-      "Please enter a Username",
-      validateEmailAndPassword,
-      asyncHandler(async (req, res) => {
-        const { username, email, password, userIcon } = req.body;
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        try {
-          const user = await User.create(
-            r({ username, email, hashedPassword, userIcon })
-          );
-          await user.save();
-          const token = getUserToken(user);
-          res.cookie("token", token);
-          res.status(201).json({ user: user.toSafeObject(), token });
-        } catch (e) {
-          return console.error(e);
-        }
-      })
-    )
+  validateUsername,
+  validateEmailAndPassword,
+  asyncHandler(async (req, res) => {
+    const { username, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await User.create(r({ username, email, hashedPassword }));
+    const token = getUserToken(user);
+    res.cookie("token", token);
+    res.status(201).json({ user: user.toSafeObject(), token });
+  })
 );
 
 // POST/user/token No Login Validation
@@ -55,10 +46,10 @@ userRouter.post(
   "/token",
   validateEmailAndPassword,
   asyncHandler(async (req, res, next) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     const user = await User.findOne({
       where: {
-        username,
+        email,
       },
     });
 
@@ -95,11 +86,18 @@ userRouter.get("/:id", async (req, res, next) => {
     where: {
       id: req.params.id,
     },
-    include: ("following", "followers"),
+    include: [
+      { model: User, as: "followers" },
+      { model: User, as: "following" },
+    ],
   });
 
+  const safeOutput = user.toSafeObject();
+  safeOutput.followers = user.followers;
+  safeOutput.following = user.following;
+
   if (user) {
-    res.send({ user });
+    res.json(safeOutput);
   } else {
     res.send("Not Found.");
     next();
