@@ -1,7 +1,7 @@
 const express = require("express");
 const buildRouter = express.Router();
-const { asyncHandler, handleValidationErrors } = require("./utility");
-const { Build, Comment } = require("../db/models");
+const { asyncHandler, handleValidationErrors } = require("../utility");
+const { Build, Comment } = require("../../db/models");
 const { Op } = require("sequelize");
 
 function r(o) {

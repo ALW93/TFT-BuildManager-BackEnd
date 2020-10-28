@@ -1,7 +1,7 @@
 const express = require("express");
 const apiRouter = express.Router();
-const { asyncHandler } = require("./utility");
-const { Champion, Trait } = require("../db/models");
+const { asyncHandler } = require("../utility");
+const { Champion, Trait } = require("../../db/models");
 
 // Get all Traits with their Champions
 apiRouter.get(

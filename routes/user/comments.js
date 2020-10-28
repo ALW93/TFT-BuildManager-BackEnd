@@ -1,8 +1,8 @@
 const express = require("express");
 const commentRouter = express.Router();
 const buildRouter = require("./builds");
-const { Comment } = require("../db/models");
-const { asyncHandler, handleValidationErrors } = require("./utility");
+const { Comment } = require("../../db/models");
+const { asyncHandler, handleValidationErrors } = require("../utility");
 
 function r(o) {
   o.createdAt = new Date();

@@ -1,8 +1,8 @@
 const express = require("express");
 const userRouter = express.Router();
 const bcrypt = require("bcryptjs");
-const { asyncHandler, handleValidationErrors } = require("./utility");
-const { User } = require("../db/models");
+const { asyncHandler, handleValidationErrors } = require("../utility");
+const { User } = require("../../db/models");
 
 function r(o) {
   o.createdAt = new Date();
