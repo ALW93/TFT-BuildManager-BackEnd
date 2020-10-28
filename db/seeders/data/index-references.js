@@ -88,6 +88,66 @@ const t = {
   Warlord: 26,
 }
 
+const i = {
+  Deathblade: 1,
+  GiantSlayer: 2,
+  HextechGunblade: 3,
+  SpearofShojin: 4,
+  GuardianAngel: 5,
+  Bloodthirster: 6,
+  ZekesHerald: 7,
+  SwordoftheDivine: 8,
+  InfinityEdge: 9,
+  RapidFirecannon: 10,
+  GuinsoosRageblade: 11,
+  StatikkShiv: 12,
+  TitansResolve: 13,
+  RunaansHurricane: 14,
+  ZzRotPortal: 15,
+  DuelistsZeal: 16,
+  LastWhisper: 17,
+  RabadonsDeathcap: 18,
+  LudensEcho: 19,
+  LocketoftheIronSolari: 20,
+  IonicSpark: 21,
+  Morellonomicon: 22,
+  AspectofDusk: 23,
+  JeweledGauntlet: 24,
+  BlueBuff: 25,
+  FrozenHeart: 26,
+  ChaliceofPower: 27,
+  Redemption: 28,
+  MagesHat: 29,
+  HandOfJustice: 30,
+  BrambleVest: 31,
+  GargoyleStoneplate: 32,
+  SunfireCape: 33,
+  VanguardsCuirass: 34,
+  ShroudofStillness: 35,
+  DragonsClaw: 36,
+  Zephyr: 37,
+  ElderwoodSprout: 38,
+  Quicksilver: 39,
+  WarmogsArmor: 40,
+  WarlordsBanner: 41,
+  TrapClaw: 42,
+  ForceofNature: 43,
+  YoumuusGhostblade: 44,
+  ThiefsGloves: 45,
+}
+
+const p = {
+  BFSword: 1,
+  RecurveBow: 2,
+  NeedlesslyLargeRod: 3,
+  TearoftheGoddess: 4,
+  ChainVest: 5,
+  NegatronCloak: 6,
+  GiantsBelt: 7,
+  Spatula: 8,
+  SparringGloves: 9,
+}
+
 const r = (o) => {
   o.createdAt = new Date();
   o.updatedAt = new Date();
@@ -95,5 +155,5 @@ const r = (o) => {
 }
 
 module.exports = {
-  c, t, r
+  c, t, r, p, i
 }

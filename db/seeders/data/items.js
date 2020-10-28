@@ -360,12 +360,11 @@ const items = [
   },
 ];
 
-
-
 const seedComponents = () => components.map(c => r(c));
-
 const seedItems = () => items.map(i => r(i));
+const lol = () => items.map((t, i) => console.log(t.name + ":" + (i + 1) + ","))
 
+console.log(lol())
 
 module.exports = {
   seedComponents,

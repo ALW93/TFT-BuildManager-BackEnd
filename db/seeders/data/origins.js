@@ -222,55 +222,272 @@ const origins = [
     traitId: t.Hunter,
   },
   {
-    championId: c.
-      traitId:
+    championId: c.LeeSin,
+    traitId: t.Divine
   },
   {
-    championId:
-      traitId:
+    championId: c.LeeSin,
+    traitId: t.Duelist
   },
   {
-    championId:
-      traitId:
+    championId: c.Lillia,
+    traitId: t.Dusk,
   },
   {
-    championId:
-      traitId:
+    championId: c.Lillia,
+    traitId: t.Mage,
   },
   {
-    championId:
-      traitId:
+    championId: c.Lissandra,
+    traitId: t.Moonlight,
   },
   {
-    championId:
-      traitId:
+    championId: c.Lissandra,
+    traitId: t.Dazzler,
   },
   {
-    championId:
-      traitId:
+    championId: c.Lulu,
+    traitId: t.Elderwood,
   },
   {
-    championId:
-      traitId:
+    championId: c.Lulu,
+    traitId: t.Mage,
   },
   {
-    championId:
-      traitId:
+    championId: c.Lux,
+    traitId: t.Divine,
   },
   {
-    championId:
-      traitId:
+    championId: c.Lux,
+    traitId: c.Dazzler,
   },
   {
-    championId:
-      traitId:
+    championId: c.Maokai,
+    traitId: t.Elderwood,
   },
   {
-    championId:
-      traitId:
+    championId: c.Maokai,
+    traitId: t.Brawler
+  },
+  {
+    championId: c.Morgana,
+    traitId: t.Enlightened,
+  },
+  {
+    championId: c.Morgana,
+    traitId: t.Dazzler,
+  },
+  {
+    championId: c.Nami,
+    traitId: t.Enlightened,
+  },
+  {
+    championId: c.Nami,
+    traitId: t.Mage,
+  },
+  {
+    championId: c.Nidalee,
+    traitId: t.Warlord,
+  },
+  {
+    championId: c.Nidalee,
+    traitId: t.Sharpshooter
+  },
+  {
+    championId: c.NunuWillump,
+    traitId: t.Elderwood,
+  },
+  {
+    championId: c.NunuWillump,
+    traitId: t.Brawler
+  },
+  {
+    championId: c.Pyke,
+    traitId: t.Cultist,
+  },
+  {
+    championId: c.Pyke,
+    traitId: t.Assassin,
+  },
+  {
+    championId: c.Riven,
+    traitId: t.Dusk,
+  },
+  {
+    championId: c.Riven,
+    traitId: t.Keeper
+  },
+  {
+    championId: c.Sejuani,
+    traitId: t.Fortune
+  },
+  {
+    championId: c.Sejuani,
+    traitId: t.Vanguard
+  },
+  {
+    championId: c.Sett,
+    traitId: t.TheBoss
+  },
+  {
+    championId: c.Sett,
+    traitId: t.Brawler
+  },
+  {
+    championId: c.Shen,
+    traitId: t.Ninja
+  },
+  {
+    championId: c.Shen,
+    traitId: t.Adept
+  },
+  {
+    championId: c.Shen,
+    traitId: t.Mystic
+  },
+  {
+    championId: c.Sylas,
+    traitId: t.Moonlight
+  },
+  {
+    championId: c.Sylas,
+    traitId: t.Brawler
+  },
+  {
+    championId: c.TahmKench,
+    traitId: t.Fortune
+  },
+  {
+    championId: c.TahmKench,
+    traitId: t.Brawler
+  },
+  {
+    championId: c.Talon,
+    traitId: t.Enlightened
+  },
+  {
+    championId: c.Talon,
+    traitId: t.Assassin
+  },
+  {
+    championId: c.Teemo,
+    traitId: t.Spirit
+  },
+  {
+    championId: c.Teemo,
+    traitId: t.Sharpshooter
+  },
+  {
+    championId: c.Thresh,
+    traitId: t.Dusk
+  },
+  {
+    championId: c.Thresh,
+    traitId: t.Vanguard
+  },
+  {
+    championId: c.TwistedFate,
+    traitId: t.Cultist
+  },
+  {
+    championId: c.TwistedFate,
+    traitId: t.Mage
+  },
+  {
+    championId: c.Vayne,
+    traitId: t.Dusk
+  },
+  {
+    championId: c.Vayne,
+    traitId: t.Sharpshooter
+  },
+  {
+    championId: c.Veigar,
+    traitId: t.Elderwood
+  },
+  {
+    championId: c.Veigar,
+    traitId: t.Mage
+  },
+  {
+    championId: c.Vi,
+    traitId: t.Warlord
+  },
+  {
+    championId: c.Vi,
+    traitId: t.Brawler
+  },
+  {
+    championId: c.Warwick,
+    traitId: t.Divine
+  },
+  {
+    championId: c.Warwick,
+    traitId: t.Hunter,
+  },
+  {
+    championId: c.Warwick,
+    traitId: t.Brawler
+  },
+  {
+    championId: c.Wukong,
+    traitId: t.Divine
+  },
+  {
+    championId: c.Wukong,
+    traitId: t.Vanguard
+  },
+  {
+    championId: c.XinZhao,
+    traitId: t.Warlord
+  },
+  {
+    championId: c.XinZhao,
+    traitId: t.Duelist
+  },
+  {
+    championId: c.Yasuo,
+    traitId: t.Exile
+  },
+  {
+    championId: c.Yasuo,
+    traitId: t.Duelist
+  },
+  {
+    championId: c.Yone,
+    traitId: t.Adept
+  },
+  {
+    championId: c.Yone,
+    traitId: t.Exile
+  },
+  {
+    championId: c.Yuumi,
+    traitId: t.Spirit
+  },
+  {
+    championId: c.Yuumi,
+    traitId: t.Mystic
+  },
+  {
+    championId: c.Zed,
+    traitId: t.Ninja
+  },
+  {
+    championId: c.Zed,
+    traitId: t.Shade
+  },
+  {
+    championId: c.Zilean,
+    traitId: t.Mystic
+  },
+  {
+    championId: c.Zilean,
+    traitId: t.Cultist
   },
 ]
 
 const seedOrigins = () => origins.map(o => r(o));
+console.log(seedOrigins())
 
 module.exports = seedOrigins;
