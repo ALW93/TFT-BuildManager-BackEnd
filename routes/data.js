@@ -1,10 +1,10 @@
 const express = require("express");
-const testRouter = express.Router();
+const apiRouter = express.Router();
 const { asyncHandler } = require("./utility");
 const { Champion, Trait } = require("../db/models");
 
 // Get all Traits with their Champions
-testRouter.get(
+apiRouter.get(
   "/traits",
   asyncHandler(async (req, res) => {
     const roster = await Trait.findAll({
@@ -18,7 +18,7 @@ testRouter.get(
 );
 
 // Get All Champions with Their Traits
-testRouter.get(
+apiRouter.get(
   "/champions",
   asyncHandler(async (req, res) => {
     const traits = await Champion.findAll({
@@ -32,15 +32,15 @@ testRouter.get(
 );
 
 // Get Traits of Specific Champion
-testRouter.get(
+apiRouter.get(
   "/:id/traits",
   asyncHandler(async (req, res) => {
-    const traits = await champion.findAll({
+    const traits = await Champion.findAll({
       where: {
         id: req.params.id,
       },
       include: {
-        model: trait,
+        model: Trait,
         as: "traits",
       },
     });
@@ -49,7 +49,7 @@ testRouter.get(
 );
 
 // Get Champions of Specific Trait
-testRouter.get(
+apiRouter.get(
   "/:id/champions",
   asyncHandler(async (req, res) => {
     const champions = await Trait.findAll({
@@ -65,4 +65,4 @@ testRouter.get(
   })
 );
 
-module.exports = testRouter;
+module.exports = apiRouter;

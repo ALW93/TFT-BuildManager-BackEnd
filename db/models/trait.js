@@ -1,18 +1,22 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Trait = sequelize.define('Trait', {
-    name: DataTypes.STRING,
-    description: DataTypes.TEXT,
-    type: DataTypes.STRING,
-    image: DataTypes.STRING
-  }, {});
+  const Trait = sequelize.define(
+    "Trait",
+    {
+      name: DataTypes.STRING,
+      description: DataTypes.TEXT,
+      type: DataTypes.STRING,
+      image: DataTypes.STRING,
+    },
+    {}
+  );
   Trait.associate = function (models) {
     Trait.belongsToMany(models.Champion, {
       as: "champions",
-      through: trait_champions,
+      through: models.trait_champion,
       foreignKey: "traitId",
-      otherKey: "championId"
-    })
+      otherKey: "championId",
+    });
   };
   return Trait;
 };
