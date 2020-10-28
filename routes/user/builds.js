@@ -12,7 +12,8 @@ function r(o) {
 
 // POST/builds	Yes	Create Build (WIP)
 buildRouter.post(
-  "/", requireAuth,
+  "/",
+  requireAuth,
   asyncHandler(async (req, res) => {
     try {
       const build = await Build.create(r(req.body));
@@ -26,7 +27,8 @@ buildRouter.post(
 
 // PUT/builds/:id	Yes	Edit Build (WIP)
 buildRouter.put(
-  "/:id", requireAuth,
+  "/:id",
+  requireAuth,
   asyncHandler(async (req, res) => {
     const build = await Build.findByPk(req.params.id);
 
@@ -42,7 +44,8 @@ buildRouter.put(
 
 // DELETE/builds/:id	Yes	Delete Build (WIP)
 buildRouter.delete(
-  "/:id", requireAuth,
+  "/:id",
+  requireAuth,
   asyncHandler(async (req, res) => {
     const build = await Build.findByPk(req.params.id);
     const buildComments = await Comment.findAll({
@@ -114,18 +117,22 @@ buildRouter.get(
 );
 
 // GET/build/:id/comments	No	Read Comments for a Build
-buildRouter.get("/:id/comments", asyncHandler(async (req, res) => {
-  const comments = await Comment.findAll({
-    where: {
-      buildId: req.params.id
-    }
+buildRouter.get(
+  "/:id/comments",
+  asyncHandler(async (req, res) => {
+    const comments = await Comment.findAll({
+      where: {
+        buildId: req.params.id,
+      },
+    });
+    res.json(comments);
   })
-  res.json(comments);
-}));
+);
 
 // POST/build/:id/comments	Yes	Create Comment
 buildRouter.post(
-  "/:id/comments", requireAuth,
+  "/:id/comments",
+  requireAuth,
   asyncHandler(async (req, res) => {
     const { message, userId } = req.body;
     // userId: req.user.id (Set Up when Login Works)
@@ -140,18 +147,16 @@ buildRouter.post(
 
 // PUT/build/:id/comments	Yes	Edit Comment
 buildRouter.put(
-  "/:id/comments/:cid", requireAuth,
+  "/:id/comments",
+  requireAuth,
   asyncHandler(async (req, res) => {
-    const { editMessage } = req.body;
-    const comment = await Comment.findByPk({
-      where: {
-        id: cid
-      }
-    });
+    const { editMessage, commentId } = req.body;
+    const comment = await Comment.findByPk(commentId);
     if (!comment) {
       next();
     } else {
-      comment.message = editMessage
+      comment.message = editMessage;
+      await comment.save();
       res.send(`Comment Edited:${editMessage}`);
     }
   })
@@ -159,13 +164,10 @@ buildRouter.put(
 
 // DELETE/build/:id/comments	Yes	Delete Comment
 buildRouter.delete(
-  "/:id/comments/:cid",
+  "/:id/comments",
   asyncHandler(async (req, res) => {
-    const comment = await Comment.findByPk({
-      where: {
-        id: cid
-      }
-    });
+    const { commentId } = req.body;
+    const comment = await Comment.findByPk(commentId);
 
     if (!comment) {
       next();
@@ -175,10 +177,9 @@ buildRouter.delete(
           comment,
         },
       });
-      res.send(`Comment #${cid}: "${comment}" => Successfully Deleted!`);
+      res.send("Successfully Deleted!");
     }
   })
 );
-
 
 module.exports = buildRouter;
