@@ -6,7 +6,7 @@ const cors = require("cors");
 const bearerToken = require("express-bearer-token");
 
 const indexRouter = require("./routes/index");
-const userRouter = require("./routes/users");
+const userRouter = require("./routes/user/users")
 const buildRouter = require("./routes/builds");
 const commentRouter = require("./routes/comments");
 const apiRouter = require("./routes/data");
