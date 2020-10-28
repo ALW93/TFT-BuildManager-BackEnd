@@ -1,6 +1,6 @@
 const { i, p, r } = require("./index-references");
 
-const seedParts = [
+const parts = [
   {
     itemId: i.Deathblade,
     componentId: p.BFSword,
@@ -367,3 +367,7 @@ const seedParts = [
     componentId: p.SparringGloves
   },
 ]
+
+const seedParts = () => parts.map((p) => r(p));
+
+module.exports = seedParts;
