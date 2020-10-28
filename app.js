@@ -7,8 +7,7 @@ const bearerToken = require("express-bearer-token");
 
 const indexRouter = require("./routes/index");
 const userRouter = require("./routes/user/users");
-// const buildRouter = require("./routes/builds");
-// const commentRouter = require("./routes/comments");
+const buildRouter = require("./routes/user/builds");
 // const apiRouter = require("./routes/data");
 
 app.use(bearerToken());
@@ -19,8 +18,7 @@ app.use(cors());
 // Routers
 app.use("/", indexRouter);
 app.use("/users", userRouter);
-// app.use("/builds", buildRouter);
-// app.use("/comments", commentRouter);
+app.use("/builds", buildRouter);
 // app.use("/api", apiRouter);
 
 app.use(express.static(path.join(__dirname, "public")));

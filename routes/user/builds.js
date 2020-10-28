@@ -2,30 +2,12 @@ const express = require("express");
 const buildRouter = express.Router();
 const { asyncHandler, handleValidationErrors } = require("../utility");
 const { Build, Comment } = require("../../db/models");
-const { Op } = require("sequelize");
 
 function r(o) {
   o.createdAt = new Date();
   o.updatedAt = new Date();
   return o;
 }
-
-buildRouter.get(
-  "/traits",
-  asyncHandler(async (req, res) => {
-    try {
-      const { search } = req.body;
-      const traitBuild = await Build.findAll({
-        where: {
-          traits: { [Op.contains]: [search] },
-        },
-      });
-      res.send(traitBuild);
-    } catch (e) {
-      console.error(e);
-    }
-  })
-);
 
 // Create
 buildRouter.post(
@@ -43,7 +25,7 @@ buildRouter.post(
 
 // Read
 buildRouter.get(
-  "/:id",
+  "/id/:id",
   asyncHandler(async (req, res, next) => {
     const build = await Build.findOne({
       where: {
@@ -57,6 +39,28 @@ buildRouter.get(
     } else {
       next();
     }
+  })
+);
+
+// GET/builds	No Lists all Builds in Database
+buildRouter.get(
+  "/",
+  asyncHandler(async (req, res) => {
+    const db_builds = await Build.findAll();
+    res.status(200).json(db_builds);
+  })
+);
+
+// GET/builds/meta No	Retrieve Meta Builds
+buildRouter.get(
+  "/meta",
+  asyncHandler(async (req, res) => {
+    const meta_builds = await Build.findAll({
+      where: {
+        authorId: 1,
+      },
+    });
+    res.json(meta_builds);
   })
 );
 
