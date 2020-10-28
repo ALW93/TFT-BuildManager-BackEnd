@@ -1,15 +1,15 @@
 const express = require("express");
 const testRouter = express.Router();
 const { asyncHandler } = require("./utility");
-const { champion, trait, origin } = require("../db/models");
+const { Champion, Trait } = require("../db/models");
 
 // Get all Traits with their Champions
 testRouter.get(
   "/traits",
   asyncHandler(async (req, res) => {
-    const roster = await trait.findAll({
+    const roster = await Trait.findAll({
       include: {
-        model: champion,
+        model: Champion,
         as: "champions",
       },
     });
@@ -21,9 +21,9 @@ testRouter.get(
 testRouter.get(
   "/champions",
   asyncHandler(async (req, res) => {
-    const traits = await champion.findAll({
+    const traits = await Champion.findAll({
       include: {
-        model: trait,
+        model: Trait,
         as: "traits",
       },
     });
@@ -52,12 +52,12 @@ testRouter.get(
 testRouter.get(
   "/:id/champions",
   asyncHandler(async (req, res) => {
-    const champions = await trait.findAll({
+    const champions = await Trait.findAll({
       where: {
         id: req.params.id,
       },
       include: {
-        model: champion,
+        model: Champion,
         as: "champions",
       },
     });
