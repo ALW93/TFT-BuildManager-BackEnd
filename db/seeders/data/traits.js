@@ -1,8 +1,4 @@
-function r(o) {
-  o.createdAt = new Date();
-  o.updatedAt = new Date();
-  return o;
-}
+const { r } = require("./index-references");
 
 const traits = [
   {
