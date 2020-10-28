@@ -6,8 +6,13 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.TEXT,
     image: DataTypes.STRING
   }, {});
-  Component.associate = function(models) {
-    // associations can be defined here
+  Component.associate = function (models) {
+    Component.belongsToMany(models.Item, {
+      as: "components",
+      through: models.item_component,
+      foreignKey: "componentId",
+      otherKey: "itemId",
+    });
   };
   return Component;
 };

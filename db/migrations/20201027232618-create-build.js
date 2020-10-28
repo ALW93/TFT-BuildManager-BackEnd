@@ -9,12 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
+        allowNull: false,
+        unique: true,
         type: Sequelize.STRING
       },
       tier: {
         type: Sequelize.STRING
       },
       playstyle: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       votes: {
@@ -24,7 +27,12 @@ module.exports = {
         type: Sequelize.TEXT
       },
       authorId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Users",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,

@@ -9,13 +9,24 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       message: {
+        allowNull: false,
         type: Sequelize.TEXT
       },
       userId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Users",
+          key: "id",
+        },
       },
       buildId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Builds",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,
