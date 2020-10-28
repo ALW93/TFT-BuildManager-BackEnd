@@ -1,11 +1,15 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Item = sequelize.define('Item', {
-    name: DataTypes.STRING,
-    acronym: DataTypes.STRING,
-    description: DataTypes.TEXT,
-    image: DataTypes.STRING
-  }, {});
+  const Item = sequelize.define(
+    "Item",
+    {
+      name: DataTypes.STRING,
+      acronym: DataTypes.STRING,
+      description: DataTypes.TEXT,
+      image: DataTypes.STRING,
+    },
+    {}
+  );
   Item.associate = function (models) {
     Item.belongsToMany(models.Component, {
       as: "components",
@@ -20,13 +24,11 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: "championId",
     });
     Item.belongsToMany(models.Build, {
-      as: "item_customization",
       through: models.build_champion_item,
       foreignKey: "itemId",
       otherKey: "buildId",
     });
     Item.belongsToMany(models.Champion, {
-      as: "item_customization",
       through: models.build_champion_item,
       foreignKey: "itemId",
       otherKey: "championId",
