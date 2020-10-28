@@ -49,7 +49,7 @@ buildRouter.get(
       where: {
         id: req.params.id,
       },
-      include: "Comments",
+      // include: "Comments",
     });
 
     if (build) {

@@ -11,362 +11,362 @@ const parts = [
   },
   {
     itemId: i.GiantSlayer,
-    componentId: p.BFSword
+    componentId: p.BFSword,
   },
   {
     itemId: i.GiantSlayer,
-    componentId: p.RecurveBow
+    componentId: p.RecurveBow,
   },
   {
     itemId: i.HextechGunblade,
-    componentId: p.BFSword
+    componentId: p.BFSword,
   },
   {
     itemId: i.HextechGunblade,
-    componentId: p.NeedlesslyLargeRod
+    componentId: p.NeedlesslyLargeRod,
   },
   {
     itemId: i.SpearofShojin,
-    componentId: p.BFSword
+    componentId: p.BFSword,
   },
   {
     itemId: i.SpearofShojin,
-    componentId: p.TearoftheGoddess
+    componentId: p.TearoftheGoddess,
   },
   {
     itemId: i.GuardianAngel,
-    componentId: p.BFSword
+    componentId: p.BFSword,
   },
   {
     itemId: i.GuardianAngel,
-    componentId: p.ChainVest
+    componentId: p.ChainVest,
   },
   {
     itemId: i.Bloodthirster,
-    componentId: p.Bloodthirster
+    componentId: p.BFSword,
   },
   {
     itemId: i.Bloodthirster,
-    componentId: p.NegatronCloak
+    componentId: p.NegatronCloak,
   },
   {
     itemId: i.ZekesHerald,
-    componentId: p.BFSword
+    componentId: p.BFSword,
   },
   {
     itemId: i.ZekesHerald,
-    componentId: p.GiantsBelt
+    componentId: p.GiantsBelt,
   },
   {
     itemId: i.SwordoftheDivine,
-    componentId: p.Spatula
+    componentId: p.Spatula,
   },
   {
     itemId: i.SwordoftheDivine,
-    componentId: p.BFSword
+    componentId: p.BFSword,
   },
   {
     itemId: i.InfinityEdge,
-    componentId: p.BFSword
+    componentId: p.BFSword,
   },
   {
     itemId: i.InfinityEdge,
-    componentId: p.SparringGloves
+    componentId: p.SparringGloves,
   },
   {
     itemId: i.RapidFirecannon,
-    componentId: p.RecurveBow
+    componentId: p.RecurveBow,
   },
   {
     itemId: i.RapidFirecannon,
-    componentId: p.RecurveBow
+    componentId: p.RecurveBow,
   },
   {
     itemId: i.GuinsoosRageblade,
-    componentId: p.RecurveBow
+    componentId: p.RecurveBow,
   },
   {
     itemId: i.GuinsoosRageblade,
-    componentId: p.NeedlesslyLargeRod
+    componentId: p.NeedlesslyLargeRod,
   },
   {
     itemId: i.StatikkShiv,
-    componentId: p.RecurveBow
+    componentId: p.RecurveBow,
   },
   {
     itemId: i.StatikkShiv,
-    componentId: p.TearoftheGoddess
+    componentId: p.TearoftheGoddess,
   },
 
   {
     itemId: i.TitansResolve,
-    componentId: p.RecurveBow
+    componentId: p.RecurveBow,
   },
   {
     itemId: i.TitansResolve,
-    componentId: p.ChainVest
+    componentId: p.ChainVest,
   },
 
   {
     itemId: i.RunaansHurricane,
-    componentId: p.RecurveBow
+    componentId: p.RecurveBow,
   },
   {
     itemId: i.RunaansHurricane,
-    componentId: p.NegatronCloak
+    componentId: p.NegatronCloak,
   },
 
   {
     itemId: i.ZzRotPortal,
-    componentId: p.RecurveBow
+    componentId: p.RecurveBow,
   },
   {
     itemId: i.ZzRotPortal,
-    componentId: p.GiantsBelt
+    componentId: p.GiantsBelt,
   },
 
   {
     itemId: i.DuelistsZeal,
-    componentId: p.RecurveBow
+    componentId: p.RecurveBow,
   },
   {
     itemId: i.DuelistsZeal,
-    componentId: p.Spatula
+    componentId: p.Spatula,
   },
 
   {
     itemId: i.LastWhisper,
-    componentId: p.RecurveBow
+    componentId: p.RecurveBow,
   },
   {
     itemId: i.LastWhisper,
-    componentId: p.SparringGloves
+    componentId: p.SparringGloves,
   },
   {
     itemId: i.RabadonsDeathcap,
-    componentId: p.NeedlesslyLargeRod
+    componentId: p.NeedlesslyLargeRod,
   },
   {
     itemId: i.RabadonsDeathcap,
-    componentId: p.NeedlesslyLargeRod
+    componentId: p.NeedlesslyLargeRod,
   },
   {
     itemId: i.LudensEcho,
-    componentId: p.NeedlesslyLargeRod
+    componentId: p.NeedlesslyLargeRod,
   },
   {
     itemId: i.LudensEcho,
-    componentId: p.TearoftheGoddess
+    componentId: p.TearoftheGoddess,
   },
   {
     itemId: i.LocketoftheIronSolari,
-    componentId: p.NeedlesslyLargeRod
+    componentId: p.NeedlesslyLargeRod,
   },
   {
     itemId: i.LocketoftheIronSolari,
-    componentId: p.ChainVest
+    componentId: p.ChainVest,
   },
   {
     itemId: i.IonicSpark,
-    componentId: p.NeedlesslyLargeRod
+    componentId: p.NeedlesslyLargeRod,
   },
   {
     itemId: i.IonicSpark,
-    componentId: p.NegatronCloak
+    componentId: p.NegatronCloak,
   },
   {
     itemId: i.Morellonomicon,
-    componentId: p.NeedlesslyLargeRod
+    componentId: p.NeedlesslyLargeRod,
   },
   {
     itemId: i.Morellonomicon,
-    componentId: p.GiantsBelt
+    componentId: p.GiantsBelt,
   },
   {
     itemId: i.AspectofDusk,
-    componentId: p.NeedlesslyLargeRod
+    componentId: p.NeedlesslyLargeRod,
   },
   {
     itemId: i.AspectofDusk,
-    componentId: p.Spatula
+    componentId: p.Spatula,
   },
   {
     itemId: i.JeweledGauntlet,
-    componentId: p.NeedlesslyLargeRod
+    componentId: p.NeedlesslyLargeRod,
   },
   {
     itemId: i.JeweledGauntlet,
-    componentId: p.SparringGloves
+    componentId: p.SparringGloves,
   },
   {
     itemId: i.BlueBuff,
-    componentId: p.TearoftheGoddess
+    componentId: p.TearoftheGoddess,
   },
   {
     itemId: i.BlueBuff,
-    componentId: p.TearoftheGoddess
+    componentId: p.TearoftheGoddess,
   },
   {
     itemId: i.FrozenHeart,
-    componentId: p.TearoftheGoddess
+    componentId: p.TearoftheGoddess,
   },
   {
     itemId: i.FrozenHeart,
-    componentId: p.ChainVest
+    componentId: p.ChainVest,
   },
   {
     itemId: i.ChaliceofPower,
-    componentId: p.TearoftheGoddess
+    componentId: p.TearoftheGoddess,
   },
   {
     itemId: i.ChaliceofPower,
-    componentId: p.NegatronCloak
+    componentId: p.NegatronCloak,
   },
   {
     itemId: i.Redemption,
-    componentId: p.TearoftheGoddess
+    componentId: p.TearoftheGoddess,
   },
   {
     itemId: i.Redemption,
-    componentId: p.GiantsBelt
+    componentId: p.GiantsBelt,
   },
   {
     itemId: i.MagesHat,
-    componentId: p.TearoftheGoddess
+    componentId: p.TearoftheGoddess,
   },
   {
     itemId: i.MagesHat,
-    componentId: p.Spatula
+    componentId: p.Spatula,
   },
   {
     itemId: i.HandOfJustice,
-    componentId: p.TearoftheGoddess
+    componentId: p.TearoftheGoddess,
   },
   {
     itemId: i.HandOfJustice,
-    componentId: p.SparringGloves
+    componentId: p.SparringGloves,
   },
   {
     itemId: i.BrambleVest,
-    componentId: p.ChainVest
+    componentId: p.ChainVest,
   },
   {
     itemId: i.BrambleVest,
-    componentId: p.ChainVest
+    componentId: p.ChainVest,
   },
   {
     itemId: i.GargoyleStoneplate,
-    componentId: p.NegatronCloak
+    componentId: p.NegatronCloak,
   },
   {
     itemId: i.GargoyleStoneplate,
-    componentId: p.ChainVest
+    componentId: p.ChainVest,
   },
   {
     itemId: i.SunfireCape,
-    componentId: p.GiantsBelt
+    componentId: p.GiantsBelt,
   },
   {
     itemId: i.SunfireCape,
-    componentId: p.ChainVest
+    componentId: p.ChainVest,
   },
   {
     itemId: i.VanguardsCuirass,
-    componentId: p.Spatula
+    componentId: p.Spatula,
   },
   {
     itemId: i.VanguardsCuirass,
-    componentId: p.ChainVest
+    componentId: p.ChainVest,
   },
   {
     itemId: i.ShroudofStillness,
-    componentId: p.ChainVest
+    componentId: p.ChainVest,
   },
   {
     itemId: i.ShroudofStillness,
-    componentId: p.SparringGloves
+    componentId: p.SparringGloves,
   },
   {
     itemId: i.DragonsClaw,
-    componentId: p.NegatronCloak
+    componentId: p.NegatronCloak,
   },
   {
     itemId: i.DragonsClaw,
-    componentId: p.NegatronCloak
+    componentId: p.NegatronCloak,
   },
   {
     itemId: i.Zephyr,
-    componentId: p.NegatronCloak
+    componentId: p.NegatronCloak,
   },
   {
     itemId: i.Zephyr,
-    componentId: p.GiantsBelt
+    componentId: p.GiantsBelt,
   },
   {
     itemId: i.ElderwoodSprout,
-    componentId: p.NegatronCloak
+    componentId: p.NegatronCloak,
   },
   {
     itemId: i.ElderwoodSprout,
-    componentId: p.Spatula
+    componentId: p.Spatula,
   },
   {
     itemId: i.Quicksilver,
-    componentId: p.NegatronCloak
+    componentId: p.NegatronCloak,
   },
   {
     itemId: i.Quicksilver,
-    componentId: p.SparringGloves
+    componentId: p.SparringGloves,
   },
   {
     itemId: i.WarmogsArmor,
-    componentId: p.GiantsBelt
+    componentId: p.GiantsBelt,
   },
   {
     itemId: i.WarmogsArmor,
-    componentId: p.GiantsBelt
+    componentId: p.GiantsBelt,
   },
   {
     itemId: i.WarlordsBanner,
-    componentId: p.GiantsBelt
+    componentId: p.GiantsBelt,
   },
   {
     itemId: i.WarlordsBanner,
-    componentId: p.Spatula
+    componentId: p.Spatula,
   },
   {
     itemId: i.TrapClaw,
-    componentId: p.GiantsBelt
+    componentId: p.GiantsBelt,
   },
   {
     itemId: i.TrapClaw,
-    componentId: p.SparringGloves
+    componentId: p.SparringGloves,
   },
   {
     itemId: i.ForceofNature,
-    componentId: p.Spatula
+    componentId: p.Spatula,
   },
   {
     itemId: i.ForceofNature,
-    componentId: p.Spatula
+    componentId: p.Spatula,
   },
   {
     itemId: i.YoumuusGhostblade,
-    componentId: p.SparringGloves
+    componentId: p.SparringGloves,
   },
   {
     itemId: i.YoumuusGhostblade,
-    componentId: p.Spatula
+    componentId: p.Spatula,
   },
   {
     itemId: i.ThiefsGloves,
-    componentId: p.SparringGloves
+    componentId: p.SparringGloves,
   },
   {
     itemId: i.ThiefsGloves,
-    componentId: p.SparringGloves
+    componentId: p.SparringGloves,
   },
-]
+];
 
 const seedParts = () => parts.map((p) => r(p));
 
