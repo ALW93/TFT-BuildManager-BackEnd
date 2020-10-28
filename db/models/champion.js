@@ -28,15 +28,13 @@ module.exports = (sequelize, DataTypes) => {
       through: models.build_champion,
       foreignKey: "championId",
       otherKey: "buildId",
-    })
+    });
     Champion.belongsToMany(models.Build, {
-      as: "item_customization",
       through: models.build_champion_item,
       foreignKey: "championId",
       otherKey: "buildId",
     });
     Champion.belongsToMany(models.Item, {
-      as: "item_customization",
       through: models.build_champion_item,
       foreignKey: "championId",
       otherKey: "itemId",

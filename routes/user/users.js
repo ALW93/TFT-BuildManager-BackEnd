@@ -12,10 +12,6 @@ function r(o) {
   return o;
 }
 
-const validateUsername = check("username")
-  .exists({ checkFalsy: true })
-  .withMessage("Please enter a Username"),
-
 const validateEmailAndPassword = [
   check("email")
     .exists({ checkFalsy: true })
@@ -29,25 +25,33 @@ const validateEmailAndPassword = [
 
 // POST/user No Create User
 userRouter.post(
-  "/", validateEmailAndPassword, validateUsername,
-  asyncHandler(async (req, res) => {
-    const { username, email, password, userIcon } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
+  "/",
+  check("username")
+    .exists({ checkFalsy: true })
+    .withMessage(
+      "Please enter a Username",
+      validateEmailAndPassword,
+      asyncHandler(async (req, res) => {
+        const { username, email, password, userIcon } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-    try {
-      const user = await User.create(r({ username, email, hashedPassword, userIcon }));
-      await user.save();
-      const token = getUserToken(user);
-      res.cookie("token", token);
-      res.status(201).json({ user: user.toSafeObject(), token });
-    } catch (e) {
-      return console.error(e);
-    }
-  })
+        try {
+          const user = await User.create(
+            r({ username, email, hashedPassword, userIcon })
+          );
+          await user.save();
+          const token = getUserToken(user);
+          res.cookie("token", token);
+          res.status(201).json({ user: user.toSafeObject(), token });
+        } catch (e) {
+          return console.error(e);
+        }
+      })
+    )
 );
 
 // POST/user/token No Login Validation
-router.post(
+userRouter.post(
   "/token",
   validateEmailAndPassword,
   asyncHandler(async (req, res, next) => {
@@ -84,7 +88,6 @@ userRouter.get(
     }
   })
 );
-
 
 // GET/user/:id	No Finds Specific User Limited Information with Follower Information
 userRouter.get("/:id", async (req, res, next) => {
