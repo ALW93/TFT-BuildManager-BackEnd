@@ -1,11 +1,52 @@
 const express = require("express");
 const apiRouter = express.Router();
 const { asyncHandler } = require("../utility");
-const { Champion, Trait } = require("../../db/models");
+const { Champion, Trait, Item, Component } = require("../../db/models");
 
-// Get all Traits with their Champions
+// GET	/api/champions	No	Retrieves all Champions in Database
+apiRouter.get(
+  "/champions",
+  asyncHandler(async (req, res) => {
+    const champions = await Champion.findAll();
+    res.status(200).json(champions);
+  })
+);
+
+// GET	/api/champions/:id	No	Retrieves specific Champion with Recommended Item Build & Trait Info
+apiRouter.get(
+  "/champions/:id",
+  asyncHandler(async (req, res) => {
+    const championInfo = await Champion.findAll({
+      where: {
+        id: req.params.id,
+      },
+      include: [
+        {
+          model: Trait,
+          as: "traits",
+        },
+        {
+          model: Item,
+          as: "default_equipment",
+        },
+      ],
+    });
+    res.status(200).json(championInfo);
+  })
+);
+
+// GET	/api/traits	No	Retrieves all Traits in Database
 apiRouter.get(
   "/traits",
+  asyncHandler(async (req, res) => {
+    const traits = await Trait.findAll();
+    res.status(200).json(traits);
+  })
+);
+
+// GET	/api/traits/:id	No	Retrieves all Champions in a Specific Trait
+apiRouter.get(
+  "/traits/:id",
   asyncHandler(async (req, res) => {
     const roster = await Trait.findAll({
       include: {
@@ -13,55 +54,25 @@ apiRouter.get(
         as: "champions",
       },
     });
-    res.send(roster);
+    res.json(roster);
   })
 );
 
-// Get All Champions with Their Traits
+// GET	/api/items	No	Retrieves all Items in the Database
 apiRouter.get(
-  "/champions",
+  "/items",
   asyncHandler(async (req, res) => {
-    const traits = await Champion.findAll({
-      include: {
-        model: Trait,
-        as: "traits",
-      },
-    });
-    res.send(traits);
+    const items = await Item.findAll();
+    res.status(200).json(items);
   })
 );
 
-// Get Traits of Specific Champion
+// GET	/api/components	No	Retrieves all Components in Database
 apiRouter.get(
-  "/:id/traits",
+  "/components",
   asyncHandler(async (req, res) => {
-    const traits = await Champion.findAll({
-      where: {
-        id: req.params.id,
-      },
-      include: {
-        model: Trait,
-        as: "traits",
-      },
-    });
-    res.send(traits);
-  })
-);
-
-// Get Champions of Specific Trait
-apiRouter.get(
-  "/:id/champions",
-  asyncHandler(async (req, res) => {
-    const champions = await Trait.findAll({
-      where: {
-        id: req.params.id,
-      },
-      include: {
-        model: Champion,
-        as: "champions",
-      },
-    });
-    res.send(champions);
+    const components = await Component.findAll();
+    res.status(200).json(components);
   })
 );
 
