@@ -1,21 +1,26 @@
 const bearerToken = require("express-bearer-token");
 const jwt = require("jsonwebtoken");
+const uuid = require('uuid').v4;
+
 const { jwtConfig } = require("../config");
 const { secret, expiresIn } = jwtConfig;
 const { User } = require("../db/models");
 
 // Generate Token for User
 const getUserToken = (user) => {
-  const userDataForToken = {
+
+  const data = {
     id: user.id,
     email: user.email,
+    username: user.username,
   };
 
-  const token = jwt.sign({ data: userDataForToken }, secret, {
-    expiresIn: parseInt(expiresIn, 10),
-  });
+  const jwtid = uuid();
 
-  return token;
+  return {
+    jti: jwtid,
+    token: jwt.sign({ data }, secret, { expiresIn: parseInt(expiresIn, 10), jwtid })
+  };
 };
 
 // Restore User Session

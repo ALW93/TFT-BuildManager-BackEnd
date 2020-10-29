@@ -74,22 +74,3 @@ module.exports = {
   teamA,
   itemA,
 };
-
-
-4: {
-  title: "6 Sharpshooters",
-    tier: "S",
-      playstyle: "Standard",
-        votes: 3122,
-          notes: "Build a lot of Zeke's and find Sharpshooter Chosen",
-            authorId: 1,
-              team: [{
-                1: true,
-                2: false,
-                3: false,
-              }],
-                items: [{
-                  1: 23,
-                  1: 15,
-                }]
-}
