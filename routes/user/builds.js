@@ -2,7 +2,14 @@ const express = require("express");
 const buildRouter = express.Router();
 const { requireAuth } = require("../security");
 const { asyncHandler, handleValidationErrors } = require("../utility");
-const { Build, Comment, Champion, Item } = require("../../db/models");
+const {
+  Build,
+  Comment,
+  Champion,
+  Item,
+  build_champion,
+  build_champion_item,
+} = require("../../db/models");
 
 function r(o) {
   o.createdAt = new Date();
@@ -14,21 +21,56 @@ function r(o) {
 // Step Two: Grab PK ID from Created Form (this is buildId)
 // Create Team and Items with buildId.
 
-// POST/builds	Yes	Create Build (WIP)
+// POST/builds	Yes	Create Build
 buildRouter.post(
   "/",
   requireAuth,
   asyncHandler(async (req, res) => {
-    try {
-      const build = await Build.create(r(req.body));
-      await build.save();
-      res.send(build);
-    } catch (e) {
-      console.error(e);
-    }
+    const { title, tier, playstyle, votes, notes } = req.body;
+    const authorId = 1;
+    // authorId = req.user.id when frontend auth is completed.
+    const build = await Build.create(
+      r({ title, tier, playstyle, votes, notes, authorId })
+    );
+    await build.save();
+    const findingId = await Build.findOne({
+      where: {
+        title: title,
+      },
+    });
+
+    const buildId = findingId.id;
+
+    const { team } = req.body;
+    team.forEach(async (character) => {
+      await build_champion.create(r({ ...character, buildId: buildId }));
+      await build_champion.save();
+    });
+
+    const { items } = req.body;
+    items.forEach(async (item) => {
+      await build_champion_item.create(r({ ...item, buildId: buildId }));
+      await build_champion_item.save();
+    });
+
+    res.send("Successfully Posted Build!");
   })
 );
 
+// POST/builds	Yes	Create Build (WIP)
+// buildRouter.post(
+//   "/",
+//   requireAuth,
+//   asyncHandler(async (req, res) => {
+//     try {
+//       const build = await Build.create(r(req.body));
+//       await build.save();
+//       res.send(build);
+//     } catch (e) {
+//       console.error(e);
+//     }
+//   })
+// );
 
 // PUT/builds/:id	Yes	Edit Build (WIP)
 buildRouter.put(
