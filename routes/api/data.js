@@ -37,6 +37,15 @@ apiRouter.get("/traits", asyncHandler(async (req, res) => {
 }));
 
 // GET	/api/traits/:id	No	Retrieves all Champions in a Specific Trait
+apiRouter.get("/traits/:id", asyncHandler(async (req, res) => {
+  const roster = await Trait.findAll({
+    include: {
+      model: Champion,
+      as: "champions"
+    }
+  })
+  res.json(roster.champions)
+}))
 
 // GET	/api/items	No	Retrieves all Items in the Database
 apiRouter.get("/items", asyncHandler(async (req, res) => {
@@ -45,15 +54,20 @@ apiRouter.get("/items", asyncHandler(async (req, res) => {
 }));
 
 // GET	/api/items/:id	No	Retrieves Specific item with Recommended Champion Users
+apiRouter.get("/items/:id", asyncHandler(async (req, res) => {
+  const itemInfo = await Item.findAll({
+    include: {
+      model: Champion,
+      as: "default_equipment"
+    }
+  })
+}))
 
 // GET	/api/components	No	Retrieves all Components in Database
 apiRouter.get("/components", asyncHandler(async (req, res) => {
   const components = await Component.findAll();
   res.status(200).json(components);
 }));
-
-// GET	/api/components	No	Retrieves Specific Component with Items it builds into
-
 
 
 module.exports = apiRouter;
