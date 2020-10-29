@@ -36,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     Champion.belongsToMany(models.Item, {
       through: models.build_champion_item,
+      as: "custom_equipment",
       foreignKey: "championId",
       otherKey: "itemId",
     });
