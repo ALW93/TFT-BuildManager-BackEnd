@@ -14,6 +14,22 @@ function r(o) {
 // Step Two: Grab PK ID from Created Form (this is buildId)
 // Create Team and Items with buildId.
 
+// POST/builds	Yes	Create Build
+buildRouter.post("/", requireAuth, asyncHandler(async (req, res) => {
+  const { title, tier, playstyle, votes, notes } = req.body;
+  const authorId = 1;
+  // authorId = req.user.id when frontend auth is completed.
+  const build = await Build.create(r({ title, tier, playstyle, votes, notes }));
+  await build.save();
+  const findingId = await Build.findOne({
+    where: {
+      title: title,
+    }
+  })
+  const buildId = findingId.id;
+  res.json(buildId)
+}))
+
 // POST/builds	Yes	Create Build (WIP)
 buildRouter.post(
   "/",
