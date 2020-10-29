@@ -1,10 +1,10 @@
 "use strict";
 
-const { teamGen } = require("./data/testbuild");
+const { teams } = require("./data/builds/aggregate");
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert("build_champions", teamGen(), {});
+    return queryInterface.bulkInsert("build_champions", teams, {});
   },
 
   down: (queryInterface, Sequelize) => {

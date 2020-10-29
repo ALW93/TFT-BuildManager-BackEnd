@@ -10,6 +10,10 @@ function r(o) {
   return o;
 }
 
+// Step One: Create Form Data
+// Step Two: Grab PK ID from Created Form (this is buildId)
+// Create Team and Items with buildId.
+
 // POST/builds	Yes	Create Build (WIP)
 buildRouter.post(
   "/",
@@ -24,6 +28,7 @@ buildRouter.post(
     }
   })
 );
+
 
 // PUT/builds/:id	Yes	Edit Build (WIP)
 buildRouter.put(
@@ -73,7 +78,7 @@ buildRouter.delete(
   })
 );
 
-// GET/builds/:id	No	Finds Specific Build (Includes Team & Custom Itemization) (WIP)
+// GET/builds/:id	No	Finds Specific Build (Includes Team & Custom Itemization)
 buildRouter.get(
   "/id/:id",
   asyncHandler(async (req, res, next) => {

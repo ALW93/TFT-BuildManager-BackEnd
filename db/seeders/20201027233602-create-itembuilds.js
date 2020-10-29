@@ -1,10 +1,10 @@
 "use strict";
 
-const { itemData } = require("./data/testbuild");
+const { items } = require("./data/builds/aggregate");
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert("build_champion_items", itemData, {});
+    return queryInterface.bulkInsert("build_champion_items", items, {});
   },
 
   down: (queryInterface, Sequelize) => {
