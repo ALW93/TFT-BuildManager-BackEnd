@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const { getUserToken, requireAuth } = require("../security");
 const { check } = require("express-validator");
 const { asyncHandler, handleValidationErrors } = require("../utility");
-const { User, Build, Comment, Bookmark } = require("../../db/models");
+const { User, Build, Bookmark } = require("../../db/models");
 
 function r(o) {
   o.createdAt = new Date();
@@ -36,15 +36,16 @@ userRouter.post(
     const { username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create(r({ username, email, hashedPassword }));
-    const token = getUserToken(user);
+    const { token } = getUserToken(user);
+    await user.save();
     res.cookie("token", token);
     res.status(201).json({ user: user.toSafeObject(), token });
   })
 );
 
-// POST/user/token No Login Validation
-userRouter.post(
-  "/token",
+// Put/user/session No Login Validation
+userRouter.put(
+  "/session",
   validateEmailAndPassword,
   asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
@@ -61,11 +62,21 @@ userRouter.post(
       err.errors = ["The provided credentials were invalid."];
       return next(err);
     }
-    const token = getUserToken(user);
+    const { token, jti } = getUserToken(user);
+    user.tokenId = jti;
+    await user.save();
     res.cookie("token", token);
-    res.json({ token, user: { id: user.id } });
+    res.json({ token, user: user.toSafeObject() });
   })
 );
+
+// Delete/user/session No Login Validation
+userRouter.delete("/session", requireAuth, asyncHandler(async (req, res) => {
+  req.user.tokenId = null;
+  await req.user.save();
+  res.json({ message: 'Logout Successful!' })
+
+}));
 
 // GET/user	No Lists all Users with Limited Information
 userRouter.get(
