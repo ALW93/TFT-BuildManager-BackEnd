@@ -36,7 +36,8 @@ userRouter.post(
     const { username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create(r({ username, email, hashedPassword }));
-    const token = getUserToken(user);
+    const { token } = getUserToken(user);
+    await user.save();
     res.cookie("token", token);
     res.status(201).json({ user: user.toSafeObject(), token });
   })
