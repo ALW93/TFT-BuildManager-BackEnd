@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       createdAt: this.createdAt,
       email: this.email,
       id: this.id,
-      username: this.name,
+      username: this.username,
       updatedAt: this.updatedAt,
     };
   };

@@ -71,12 +71,15 @@ userRouter.put(
 );
 
 // Delete/user/session No Login Validation
-userRouter.delete("/session", requireAuth, asyncHandler(async (req, res) => {
-  req.user.tokenId = null;
-  await req.user.save();
-  res.json({ message: 'Logout Successful!' })
-
-}));
+userRouter.delete(
+  "/session",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    req.user.tokenId = null;
+    await req.user.save();
+    res.json({ message: "Logout Successful!" });
+  })
+);
 
 // GET/user	No Lists all Users with Limited Information
 userRouter.get(
@@ -131,7 +134,8 @@ userRouter.get(
     });
 
     if (user) {
-      res.json({ builds: user.Builds });
+      const output = user.Builds.map((b) => b.id);
+      res.json({ builds: output });
     } else {
       res.send("No Builds Found.");
       next();
