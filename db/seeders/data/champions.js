@@ -1,4 +1,4 @@
-const { r } = require("./index-references")
+const { r } = require("./index-references");
 
 const Champions = [
   {
@@ -87,7 +87,7 @@ const Champions = [
     image: "./set4/champions/TFT4_Janna.png",
   },
   {
-    name: "Jarvin IV",
+    name: "JarvinIV",
     cost: 2,
     image: "./set4/champions/TFT4_JarvanIV.png",
   },
@@ -132,7 +132,7 @@ const Champions = [
     image: "./set4/champions/TFT4_Hunter.png",
   },
   {
-    name: "Lee Sin",
+    name: "LeeSin",
     cost: 5,
     image: "./set4/champions/TFT4_LeeSin.png",
   },
@@ -177,7 +177,7 @@ const Champions = [
     image: "./set4/champions/TFT4_Nidalee.png",
   },
   {
-    name: "Nunu & Willump",
+    name: "NunuWillump",
     cost: 3,
     image: "./set4/champions/TFT4_Nunu.png",
   },
@@ -212,7 +212,7 @@ const Champions = [
     image: "./set4/champions/TFT4_Sylas.png",
   },
   {
-    name: "Tahm Kench",
+    name: "TahmKench",
     cost: 1,
     image: "./set4/champions/TFT4_TahmnKench.png",
   },
@@ -232,7 +232,7 @@ const Champions = [
     image: "./set4/champions/TFT4_Thresh.png",
   },
   {
-    name: "Twisted Fate",
+    name: "TwistedFate",
     cost: 1,
     image: "./set4/champions/TFT4_TwistedFate.png",
   },
@@ -262,7 +262,7 @@ const Champions = [
     image: "./set4/champions/TFT4_Wukong.png",
   },
   {
-    name: "Xin Zhao",
+    name: "XinZhao",
     cost: 3,
     image: "./set4/champions/TFT4_XinZhao.png",
   },
@@ -295,7 +295,7 @@ const Champions = [
 
 const seedChampions = () => Champions.map((c) => r(c));
 
-const lol = () => Champions.map((t, i) => console.log(t.name + ":" + (i + 1) + ","))
-
+const lol = () =>
+  Champions.map((t, i) => console.log(t.name + ":" + (i + 1) + ","));
 
 module.exports = seedChampions;

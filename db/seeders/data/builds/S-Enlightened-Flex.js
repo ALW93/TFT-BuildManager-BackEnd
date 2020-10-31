@@ -7,25 +7,26 @@ const formB = [
     playstyle: "Standard",
     votes: 734,
     notes: "Play around your Chosen, prioritize 6 Enlightened",
-    authorId: 2,
+    authorId: 1,
   }),
 ];
 
 const team = [c.Yone, c.Irelia, c.Shen, c.Janna, c.Morgana, c.Talon, c.Lux];
 
-const teamB = () => team.map((t) => {
-  if (t === c.Talon || t === c.Morgana) {
+const teamB = () =>
+  team.map((t) => {
+    if (t === c.Talon || t === c.Morgana) {
+      return r({
+        buildId: 2,
+        championId: t,
+        carry: true,
+      });
+    }
     return r({
       buildId: 2,
       championId: t,
-      carry: true,
-    })
-  }
-  return r({
-    buildId: 2,
-    championId: t,
-  })
-})
+    });
+  });
 
 const itemB = [
   r({
@@ -58,7 +59,7 @@ const itemB = [
     championId: c.Morgana,
     itemId: i.ChaliceofPower,
   }),
-]
+];
 
 module.exports = {
   formB,

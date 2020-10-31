@@ -7,25 +7,35 @@ const formC = [
     playstyle: "Standard",
     votes: 7334,
     notes: "Vanguard or Mystic Chosen, good Ahri Items",
-    authorId: 3,
+    authorId: 1,
   }),
 ];
 
-const team = [c.Sejuani, c.Aatrox, c.Cassiopeia, c.Thresh, c.Ahri, c.Yuumi, c.Zilean, c.Shen]
+const team = [
+  c.Sejuani,
+  c.Aatrox,
+  c.Cassiopeia,
+  c.Thresh,
+  c.Ahri,
+  c.Yuumi,
+  c.Zilean,
+  c.Shen,
+];
 
-const teamC = () => team.map((t) => {
-  if (t === c.Ahri || t === c.Yuumi) {
+const teamC = () =>
+  team.map((t) => {
+    if (t === c.Ahri || t === c.Yuumi) {
+      return r({
+        buildId: 3,
+        championId: t,
+        carry: true,
+      });
+    }
     return r({
       buildId: 3,
       championId: t,
-      carry: true,
-    })
-  }
-  return r({
-    buildId: 3,
-    championId: t,
-  })
-})
+    });
+  });
 
 const itemC = [
   r({
@@ -48,10 +58,10 @@ const itemC = [
     championId: c.Yuumi,
     itemId: i.ChaliceofPower,
   }),
-]
+];
 
 module.exports = {
   formC,
   teamC,
-  itemC
+  itemC,
 };
