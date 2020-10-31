@@ -87,7 +87,7 @@ const Champions = [
     image: "./set4/champions/TFT4_Janna.png",
   },
   {
-    name: "JarvinIV",
+    name: "JarvanIV",
     cost: 2,
     image: "./set4/champions/TFT4_JarvanIV.png",
   },

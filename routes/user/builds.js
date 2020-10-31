@@ -57,21 +57,6 @@ buildRouter.post(
   })
 );
 
-// POST/builds	Yes	Create Build (WIP)
-// buildRouter.post(
-//   "/",
-//   requireAuth,
-//   asyncHandler(async (req, res) => {
-//     try {
-//       const build = await Build.create(r(req.body));
-//       await build.save();
-//       res.send(build);
-//     } catch (e) {
-//       console.error(e);
-//     }
-//   })
-// );
-
 // PUT/builds/:id	Yes	Edit Build (WIP)
 buildRouter.put(
   "/:id",
