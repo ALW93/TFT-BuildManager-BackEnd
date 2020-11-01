@@ -17,21 +17,13 @@ function r(o) {
   return o;
 }
 
-// Step One: Create Form Data
-// Step Two: Grab PK ID from Created Form (this is buildId)
-// Create Team and Items with buildId.
-
 // POST/builds	Yes	Create Build
 buildRouter.post(
   "/",
   requireAuth,
   asyncHandler(async (req, res) => {
-    const { title, tier, playstyle, votes, notes } = req.body;
-    const authorId = 1;
-    // authorId = req.user.id when frontend auth is completed.
-    const build = await Build.create(
-      r({ title, tier, playstyle, votes, notes, authorId })
-    );
+    const { title, playstyle, notes, authorId } = req.body;
+    const build = await Build.create(r({ title, playstyle, notes, authorId }));
     await build.save();
     const findingId = await Build.findOne({
       where: {
@@ -47,11 +39,11 @@ buildRouter.post(
       await build_champion.save();
     });
 
-    const { items } = req.body;
-    items.forEach(async (item) => {
-      await build_champion_item.create(r({ ...item, buildId: buildId }));
-      await build_champion_item.save();
-    });
+    // const { items } = req.body;
+    // items.forEach(async (item) => {
+    //   await build_champion_item.create(r({ ...item, buildId: buildId }));
+    //   await build_champion_item.save();
+    // });
 
     res.send("Successfully Posted Build!");
   })
