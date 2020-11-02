@@ -16,7 +16,7 @@ const c = {
   Hecarim: 15,
   Irelia: 16,
   Janna: 17,
-  JarvinIV: 18,
+  JarvanIV: 18,
   Jax: 19,
   Jhin: 20,
   Jinx: 21,
@@ -57,7 +57,7 @@ const c = {
   Yuumi: 56,
   Zed: 57,
   Zilean: 58,
-}
+};
 
 const t = {
   Adept: 1,
@@ -86,7 +86,7 @@ const t = {
   Tormented: 24,
   Vanguard: 25,
   Warlord: 26,
-}
+};
 
 const i = {
   Deathblade: 1,
@@ -134,7 +134,7 @@ const i = {
   ForceofNature: 43,
   YoumuusGhostblade: 44,
   ThiefsGloves: 45,
-}
+};
 
 const p = {
   BFSword: 1,
@@ -146,14 +146,18 @@ const p = {
   GiantsBelt: 7,
   Spatula: 8,
   SparringGloves: 9,
-}
+};
 
 const r = (o) => {
   o.createdAt = new Date();
   o.updatedAt = new Date();
   return o;
-}
+};
 
 module.exports = {
-  c, t, r, p, i
-}
+  c,
+  t,
+  r,
+  p,
+  i,
+};
