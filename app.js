@@ -16,6 +16,7 @@ app.use(express.json());
 app.use(cors());
 
 // Routers
+app.options("/", cors());
 app.use("/", indexRouter);
 app.use("/users", userRouter);
 app.use("/builds", buildRouter);
