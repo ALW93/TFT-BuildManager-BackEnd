@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
-const { seedComponents } = require("./data/items")
+const { seedComponents } = require("./data/items");
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Components', seedComponents(), {});
+    return queryInterface.bulkInsert("Components", seedComponents(), {});
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Components', null, {});
-  }
+    return queryInterface.bulkDelete("Components", null, {});
+  },
 };

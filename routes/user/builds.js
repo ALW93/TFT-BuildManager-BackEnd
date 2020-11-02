@@ -172,7 +172,6 @@ buildRouter.post(
   requireAuth,
   asyncHandler(async (req, res) => {
     const { message, userId } = req.body;
-    // userId: req.user.id (Set Up when Login Works)
 
     const comment = await Comment.create(
       r({ message, userId, buildId: req.params.id })

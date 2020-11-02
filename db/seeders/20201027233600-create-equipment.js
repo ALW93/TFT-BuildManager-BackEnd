@@ -1,25 +1,10 @@
 "use strict";
 
+const defaultEquipment = require("./data/equipment");
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert(
-      "item_champions",
-      [
-        {
-          championId: 1,
-          itemId: 2,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          championId: 1,
-          itemId: 3,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      ],
-      {}
-    );
+    return queryInterface.bulkInsert("item_champions", defaultEquipment, {});
   },
 
   down: (queryInterface, Sequelize) => {
