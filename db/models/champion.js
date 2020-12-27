@@ -5,18 +5,14 @@ module.exports = (sequelize, DataTypes) => {
     "Champion",
     {
       name: DataTypes.STRING,
+      championId: DataTypes.STRING,
       cost: DataTypes.INTEGER,
       image: DataTypes.STRING,
+      traits: DataTypes.ARRAY(DataTypes.STRING),
     },
-    {}
+    { timestamps: false }
   );
   Champion.associate = function (models) {
-    Champion.belongsToMany(models.Trait, {
-      as: "traits",
-      through: models.trait_champion,
-      foreignKey: "championId",
-      otherKey: "traitId",
-    });
     Champion.belongsToMany(models.Item, {
       as: "default_equipment",
       through: models.item_champion,

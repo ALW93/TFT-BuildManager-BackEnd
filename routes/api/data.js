@@ -2,12 +2,65 @@ const express = require("express");
 const apiRouter = express.Router();
 const { asyncHandler } = require("../utility");
 const { Champion, Trait, Item, Component } = require("../../db/models");
+const { Op } = require("sequelize");
 
 // GET	/api/champions	No	Retrieves all Champions in Database
 apiRouter.get(
   "/champions",
   asyncHandler(async (req, res) => {
     const champions = await Champion.findAll();
+    res.status(200).json(champions);
+  })
+);
+
+// GET Filter Champions Cost
+apiRouter.get(
+  "/champions/filter/cost/:cost",
+  asyncHandler(async (req, res) => {
+    const champions = await Champion.findAll({
+      where: {
+        cost: req.params.cost,
+      },
+    });
+    res.status(200).json(champions);
+  })
+);
+
+// GET Filter Champions Trait
+apiRouter.get(
+  "/champions/filter/trait/:trait",
+  asyncHandler(async (req, res) => {
+    const champions = await Champion.findAll({
+      where: {
+        traits: { [Op.contains]: [req.params.trait] },
+      },
+    });
+    res.status(200).json(champions);
+  })
+);
+
+// GET Filter Champions Cost & Trait
+apiRouter.get(
+  "/champions/filter/cost/:cost/trait/:trait",
+  asyncHandler(async (req, res) => {
+    const champions = await Champion.findAll({
+      where: {
+        cost: req.params.cost,
+        traits: { [Op.contains]: [req.params.trait] },
+      },
+    });
+    res.status(200).json(champions);
+  })
+);
+
+apiRouter.get(
+  "/champions/filter/:trait",
+  asyncHandler(async (req, res) => {
+    const champions = await Champion.findAll({
+      where: {
+        traits: { [Op.contains]: [req.params.trait] },
+      },
+    });
     res.status(200).json(champions);
   })
 );
@@ -21,10 +74,6 @@ apiRouter.get(
         id: req.params.id,
       },
       include: [
-        {
-          model: Trait,
-          as: "traits",
-        },
         {
           model: Item,
           as: "default_equipment",
