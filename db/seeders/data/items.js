@@ -360,10 +360,17 @@ const items = [
   },
 ];
 
-const seedComponents = () => components.map(c => r(c));
-const seedItems = () => items.map(i => r(i));
-const lol = () => items.map((t, i) => console.log(t.name + ":" + (i + 1) + ","))
+console.log(
+  items.map((e, i) => {
+    e.image = `../Assets/items/${i + 11}.png`;
+    return e;
+  })
+);
 
+const seedComponents = () => components.map((c) => r(c));
+const seedItems = () => items.map((i) => r(i));
+const lol = () =>
+  items.map((t, i) => console.log(t.name + ":" + (i + 1) + ","));
 
 module.exports = {
   seedComponents,

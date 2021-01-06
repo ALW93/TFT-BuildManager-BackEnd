@@ -1,4 +1,4 @@
-[
+const data = [
   {
     name: "Adept",
     description:
@@ -227,3 +227,11 @@
     sets: [3, 6, 9],
   },
 ];
+
+console.log(
+  data.map((e) => {
+    let info = e.image.replace("./set4", "../Assets");
+    e.image = info;
+    return e;
+  })
+);
