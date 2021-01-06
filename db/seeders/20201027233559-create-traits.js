@@ -1,7 +1,5 @@
 "use strict";
 
-const seedTraits = require("./data/traits");
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
@@ -14,7 +12,7 @@ module.exports = {
           type: "class",
           image: "../Assets/traits/adept.png",
           key: "Set4_Adept",
-          sets: [2, 3, 4],
+          tiers: [2, 3, 4],
         },
         {
           name: "Assassin",
@@ -23,7 +21,7 @@ module.exports = {
           type: "class",
           image: "../Assets/traits/assassin.png",
           key: "Set4_Assassin",
-          sets: [2, 4, 6],
+          tiers: [2, 4, 6],
         },
         {
           name: "Brawler",
@@ -31,7 +29,7 @@ module.exports = {
           type: "class",
           image: "../Assets/traits/brawler.png",
           key: "Set4_Brawler",
-          sets: [2, 4, 6, 8],
+          tiers: [2, 4, 6, 8],
         },
         {
           name: "Cultist",
@@ -40,7 +38,7 @@ module.exports = {
           type: "origin",
           image: "../Assets/traits/cultist.png",
           key: "Cultist",
-          sets: [3, 6, 9],
+          tiers: [3, 6, 9],
         },
         {
           name: "Dazzler",
@@ -49,7 +47,7 @@ module.exports = {
           type: "class",
           image: "../Assets/traits/dazzler.png",
           key: "Set4_Dazzler",
-          sets: [2, 4],
+          tiers: [2, 4],
         },
         {
           name: "Divine",
@@ -58,7 +56,7 @@ module.exports = {
           type: "origin",
           image: "../Assets/traits/divine.png",
           key: "Divine",
-          sets: [2, 4, 6, 8],
+          tiers: [2, 4, 6, 8],
         },
         {
           name: "Duelist",
@@ -66,7 +64,7 @@ module.exports = {
           type: "class",
           image: "../Assets/traits/duelist.png",
           key: "Duelist",
-          sets: [2, 4, 6, 8],
+          tiers: [2, 4, 6, 8],
         },
         {
           name: "Dusk",
@@ -74,7 +72,7 @@ module.exports = {
           type: "origin",
           image: "../Assets/traits/dusk.png",
           key: "Dusk",
-          sets: [2, 4, 6],
+          tiers: [2, 4, 6],
         },
         {
           name: "Elderwood",
@@ -83,7 +81,7 @@ module.exports = {
           type: "origin",
           image: "../Assets/traits/elderwood.png",
           key: "Set4_Elderwood",
-          sets: [3, 6, 9],
+          tiers: [3, 6, 9],
         },
         {
           name: "Emperor",
@@ -92,7 +90,7 @@ module.exports = {
           type: "class",
           image: "../Assets/traits/emperor.png",
           key: "Emperor",
-          sets: [1],
+          tiers: [1],
         },
         {
           name: "Enlightened",
@@ -100,7 +98,7 @@ module.exports = {
           type: "origin",
           image: "../Assets/traits/enlightened.png",
           key: "Set4_Enlightened",
-          sets: [2, 4, 6],
+          tiers: [2, 4, 6],
         },
         {
           name: "Exile",
@@ -109,7 +107,7 @@ module.exports = {
           type: "origin",
           image: "../Assets/traits/exile.png",
           key: "Set4_Exile",
-          sets: [1, 2],
+          tiers: [1, 2],
         },
         {
           name: "Fortune",
@@ -118,7 +116,7 @@ module.exports = {
           type: "origin",
           image: "../Assets/traits/fortune.png",
           key: "Fortune",
-          sets: [3, 6],
+          tiers: [3, 6],
         },
         {
           name: "Hunter",
@@ -127,7 +125,7 @@ module.exports = {
           type: "class",
           image: "../Assets/traits/hunter.png",
           key: "Hunter",
-          sets: [2, 3, 4, 5],
+          tiers: [2, 3, 4, 5],
         },
         {
           name: "Keeper",
@@ -136,7 +134,7 @@ module.exports = {
           type: "class",
           image: "../Assets/traits/keeper.png",
           key: "Keeper",
-          sets: [2, 4, 6],
+          tiers: [2, 4, 6],
         },
         {
           name: "Mage",
@@ -144,7 +142,7 @@ module.exports = {
           type: "class",
           image: "../Assets/traits/mage.png",
           key: "Set4_Mage",
-          sets: [3, 6, 9],
+          tiers: [3, 6, 9],
         },
         {
           name: "Moonlight",
@@ -153,7 +151,7 @@ module.exports = {
           type: "origin",
           image: "../Assets/traits/moonlight.png",
           key: "Moonlight",
-          sets: [3],
+          tiers: [3],
         },
         {
           name: "Mystic",
@@ -161,7 +159,7 @@ module.exports = {
           type: "class",
           image: "../Assets/traits/mystic.png",
           key: "Set4_Mystic",
-          sets: [2, 4, 6],
+          tiers: [2, 4, 6],
         },
         {
           name: "Ninja",
@@ -170,7 +168,7 @@ module.exports = {
           type: "origin",
           image: "../Assets/traits/ninja.png",
           key: "Set4_Ninja",
-          sets: [1, 4],
+          tiers: [1, 4],
         },
         {
           name: "Shade",
@@ -179,7 +177,7 @@ module.exports = {
           type: "class",
           image: "../Assets/traits/shade.png",
           key: "Set4_Shade",
-          sets: [2, 3, 4],
+          tiers: [2, 3, 4],
         },
         {
           name: "Sharpshooter",
@@ -188,7 +186,7 @@ module.exports = {
           type: "class",
           image: "../Assets/traits/sharpshooter.png",
           key: "Sharpshooter",
-          sets: [2, 4, 6],
+          tiers: [2, 4, 6],
         },
         {
           name: "Spirit",
@@ -197,7 +195,7 @@ module.exports = {
           type: "origin",
           image: "../Assets/traits/spirit.png",
           key: "Set4_Spirit",
-          sets: [2, 4],
+          tiers: [2, 4],
         },
         {
           name: "The Boss",
@@ -206,7 +204,7 @@ module.exports = {
           type: "origin",
           image: "../Assets/traits/theboss.png",
           key: "Boss",
-          sets: [1],
+          tiers: [1],
         },
         {
           name: "Tormented",
@@ -215,7 +213,7 @@ module.exports = {
           type: "origin",
           image: "../Assets/traits/tormented.png",
           key: "Set4_Tormented",
-          sets: [1],
+          tiers: [1],
         },
         {
           name: "Vanguard",
@@ -223,7 +221,7 @@ module.exports = {
           type: "class",
           image: "../Assets/traits/vanguard.png",
           key: "Set4_Vanguard",
-          sets: [2, 4, 6],
+          tiers: [2, 4, 6],
         },
         {
           name: "Warlord",
@@ -232,7 +230,7 @@ module.exports = {
           type: "origin",
           image: "../Assets/traits/warlord.png",
           key: "Warlord",
-          sets: [3, 6, 9],
+          tiers: [3, 6, 9],
         },
       ],
       {}
