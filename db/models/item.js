@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       description: DataTypes.TEXT,
       image: DataTypes.STRING,
     },
-    {}
+    { timestamps: false }
   );
   Item.associate = function (models) {
     Item.belongsToMany(models.Component, {

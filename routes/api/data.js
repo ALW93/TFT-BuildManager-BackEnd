@@ -73,12 +73,12 @@ apiRouter.get(
       where: {
         id: req.params.id,
       },
-      include: [
-        {
-          model: Item,
-          as: "default_equipment",
-        },
-      ],
+      // include: [
+      //   {
+      //     model: Item,
+      //     as: "default_equipment",
+      //   },
+      // ],
     });
     res.status(200).json(championInfo);
   })
