@@ -35,11 +35,13 @@ userRouter.post(
   asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create(r({ username, email, hashedPassword }));
-    const { token } = getUserToken(user);
-    await user.save();
-    res.cookie("token", token);
-    res.status(201).json({ user: user.toSafeObject(), token });
+    const newUser = await User.create(r({ username, email, hashedPassword }));
+    await newUser.save();
+    const token = getUserToken(newUser);
+
+    if (newUser) {
+      res.json({ user: newUser.toSafeObject(), token });
+    }
   })
 );
 
