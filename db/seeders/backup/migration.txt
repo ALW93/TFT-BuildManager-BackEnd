@@ -2,6 +2,8 @@ npx dotenv sequelize-cli db:create
 npx dotenv sequelize-cli db:migrate
 npx dotenv sequelize-cli db:seed:all
 
+npx sequelize-cli model:generate --name Board --attributes "title:string, board:json, items:array, votes:integer, guide:text, authorId:integer"
+
 npx sequelize-cli model:generate --name Champion --attributes "name:string, cost:integer, image:string"
 npx sequelize-cli model:generate --name Trait --attributes "name:string, description:text, type:string, image:string"
 npx sequelize-cli model:generate --name Item --attributes "name:string, acronym:string, description:text, image:string"
