@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "followerId",
       otherKey: "buildId",
     });
+    User.hasMany(models.Board, { foreignKey: "authorId", as: "Author" });
     User.hasMany(models.Build, { foreignKey: "authorId" });
     User.hasMany(models.Comment, { foreignKey: "userId" });
     User.belongsToMany(models.User, {
@@ -42,11 +43,10 @@ module.exports = (sequelize, DataTypes) => {
 
   User.prototype.toSafeObject = function () {
     return {
-      createdAt: this.createdAt,
-      email: this.email,
       id: this.id,
+      email: this.email,
       username: this.username,
-      updatedAt: this.updatedAt,
+      createdAt: this.createdAt,
     };
   };
 

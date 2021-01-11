@@ -39,12 +39,6 @@ buildRouter.post(
       await build_champion.save();
     });
 
-    // const { items } = req.body;
-    // items.forEach(async (item) => {
-    //   await build_champion_item.create(r({ ...item, buildId: buildId }));
-    //   await build_champion_item.save();
-    // });
-
     res.send("Successfully Posted Build!");
   })
 );
