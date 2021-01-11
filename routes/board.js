@@ -24,12 +24,17 @@ boardRouter.post(
 boardRouter.get(
   "/id/:id",
   asyncHandler(async (req, res) => {
-    const data = await Board.findAll({
+    const data = await Board.findOne({
       where: {
         id: req.params.id,
       },
+
       include: {
         model: User,
+        as: "Author",
+        attributes: {
+          exclude: ["hashedPassword"],
+        },
       },
     });
     res.status(200).json(data);

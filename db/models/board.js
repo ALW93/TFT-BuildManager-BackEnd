@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Board.associate = function (models) {
-    Board.belongsTo(models.User, { foreignKey: "authorId" });
+    Board.belongsTo(models.User, { foreignKey: "authorId", as: "Author" });
   };
   return Board;
 };
