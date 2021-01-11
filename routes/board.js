@@ -19,8 +19,20 @@ boardRouter.post(
     res.status(201).json({ newBoard });
   })
 );
+// *** Retrieve all Editor Builds ***
+boardRouter.get(
+  "/meta",
+  asyncHandler(async (req, res) => {
+    const data = await Board.findAll({
+      where: {
+        authorId: 1,
+      },
+    });
+    res.status(200).json(data);
+  })
+);
 
-// *** GET A specific Board via ID || Including Author Info ***
+// *** GET a specific Board via ID || Including Author Info ***
 boardRouter.get(
   "/id/:id",
   asyncHandler(async (req, res) => {
