@@ -19,6 +19,24 @@ boardRouter.post(
     res.status(201).json({ newBoard });
   })
 );
+
+// *** Retrieve all Builds ***
+boardRouter.get(
+  "/",
+  asyncHandler(async (req, res) => {
+    const data = await Board.findAll({
+      include: {
+        model: User,
+        as: "Author",
+        attributes: {
+          exclude: ["hashedPassword"],
+        },
+      },
+    });
+    res.status(200).json(data);
+  })
+);
+
 // *** Retrieve all Editor Builds ***
 boardRouter.get(
   "/meta",
@@ -26,6 +44,13 @@ boardRouter.get(
     const data = await Board.findAll({
       where: {
         authorId: 1,
+      },
+      include: {
+        model: User,
+        as: "Author",
+        attributes: {
+          exclude: ["hashedPassword"],
+        },
       },
     });
     res.status(200).json(data);
