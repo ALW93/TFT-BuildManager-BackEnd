@@ -6,7 +6,7 @@ module.exports = {
       "Guide_Boards",
       [
         {
-          guidId: 1,
+          guideId: 1,
           boardId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),

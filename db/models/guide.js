@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Guide.associate = function (models) {
-    Guide.belongsTo(models.User, { foreignKey: "authorId", as: "Author" });
-    Guide.hasMany(models.Board, { through: models.Guide_Board });
-    Guide.hasMany(models.Comment, { through: models.Comment });
+    Guide.belongsTo(models.User);
+    Guide.hasMany(models.Comment, { foreignKey: "guideId" });
+    Guide.belongsToMany(models.Board, { through: models.Guide_Board });
     Guide.belongsToMany(models.User, { through: models.Bookmark });
   };
   return Guide;

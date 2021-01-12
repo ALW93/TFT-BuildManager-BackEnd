@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Board, { foreignKey: "authorId", as: "Author" });
     User.hasMany(models.Comment, { foreignKey: "authorId", as: "Author" });
     User.belongsToMany(models.Guide, { through: models.Bookmark });
-    User.belongsToMany(models.User, { through: models.Follow });
+    User.belongsToMany(models.User, {
+      through: models.Follow,
+    });
   };
 
   User.prototype.validatePassword = function (password) {

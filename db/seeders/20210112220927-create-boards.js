@@ -8,9 +8,11 @@ module.exports = {
         {
           title: "Zed and Friends",
           subtitle: "Level 8 Ideal Board",
-          grid: [{ id: "TFT4_Zed", items: ["RFC", "DB"], node: 5 }],
+          grid: JSON.stringify([
+            { id: "TFT4_Zed", items: ["RFC", "DB"], node: 5 },
+          ]),
           authorId: 1,
-          actives: { Ninja: 4, Assassin: 2 },
+          actives: JSON.stringify({ Ninja: 4, Assassin: 2 }),
           position: 0,
           createdAt: new Date(),
           updatedAt: new Date(),

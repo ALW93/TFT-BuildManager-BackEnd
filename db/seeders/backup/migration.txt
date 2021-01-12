@@ -1,7 +1,7 @@
 npx dotenv sequelize-cli db:drop
 npx dotenv sequelize-cli db:create
 npx dotenv sequelize-cli db:migrate
-npx dotenv sequelize-cli db:seed:all:undo:all
+npx dotenv sequelize-cli db:seed:undo:all
 npx dotenv sequelize-cli db:seed:all
 
 npx sequelize-cli model:generate --name User --attributes "username:string, email:string, hashedPassword:string, userIcon:string, rank:string, verified:boolean"

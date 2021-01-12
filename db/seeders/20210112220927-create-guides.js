@@ -8,13 +8,13 @@ module.exports = {
         {
           title: "Zed and Friends",
           votes: 349,
-          content: {
+          content: JSON.stringify({
             ops: [
               { insert: "Guide Goes Here", attributes: { bold: true } },
               { insert: " How to Roll " },
               { insert: "Some More Details", attributes: { color: "#cccccc" } },
             ],
-          },
+          }),
           authorId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
