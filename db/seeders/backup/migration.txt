@@ -1,5 +1,7 @@
+npx dotenv sequelize-cli db:drop
 npx dotenv sequelize-cli db:create
 npx dotenv sequelize-cli db:migrate
+npx dotenv sequelize-cli db:seed:all:undo:all
 npx dotenv sequelize-cli db:seed:all
 
 npx sequelize-cli model:generate --name User --attributes "username:string, email:string, hashedPassword:string, userIcon:string, rank:string, verified:boolean"
@@ -14,4 +16,8 @@ npx sequelize-cli model:generate --name Save --attributes "boardId:integer, foll
 npx sequelize-cli seed:generate --name create-users
 npx sequelize-cli seed:generate --name create-guides
 npx sequelize-cli seed:generate --name create-boards
+npx sequelize-cli seed:generate --name create-guide_boards
+npx sequelize-cli seed:generate --name create-follows
+npx sequelize-cli seed:generate --name create-bookmarks
 npx sequelize-cli seed:generate --name create-comments
+npx sequelize-cli seed:generate --name create-saves

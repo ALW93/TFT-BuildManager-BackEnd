@@ -10,6 +10,9 @@ module.exports = {
         {
           username: "Editor",
           email: "editor@gmail.com",
+          userIcon: "fuwa",
+          rank: "Challenger",
+          verified: true,
           hashedPassword: bcrypt.hashSync("password"),
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -17,6 +20,9 @@ module.exports = {
         {
           username: "spookychu",
           email: "berber@gmail.com",
+          userIcon: "hushtail",
+          rank: "Diamond",
+          verified: true,
           hashedPassword: bcrypt.hashSync("password"),
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -24,6 +30,9 @@ module.exports = {
         {
           username: "MomatoMimumu",
           email: "ming@gmail.com",
+          userIcon: "pengu",
+          rank: "Master",
+          verified: true,
           hashedPassword: bcrypt.hashSync("password"),
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -31,6 +40,9 @@ module.exports = {
         {
           username: "No Tomatoes",
           email: "tomato@gmail.com",
+          userIcon: "pengu",
+          rank: "Iron",
+          verified: true,
           hashedPassword: bcrypt.hashSync("password"),
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -38,6 +50,9 @@ module.exports = {
         {
           username: "Saladz",
           email: "alan@gmail.com",
+          userIcon: "silverwing",
+          rank: "Diamond",
+          verified: true,
           hashedPassword: bcrypt.hashSync("password"),
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -45,6 +60,9 @@ module.exports = {
         {
           username: "Giratina",
           email: "brandon@gmail.com",
+          userIcon: "shisa",
+          rank: "Silver",
+          verified: true,
           hashedPassword: bcrypt.hashSync("password"),
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -52,6 +70,9 @@ module.exports = {
         {
           username: "tiibasu",
           email: "ak@gmail.com",
+          userIcon: "shisa",
+          rank: "Bronze",
+          verified: true,
           hashedPassword: bcrypt.hashSync("password"),
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -59,6 +80,9 @@ module.exports = {
         {
           username: "Static Snow",
           email: "keith@gmail.com",
+          userIcon: "pengu",
+          rank: "Platinum",
+          verified: true,
           hashedPassword: bcrypt.hashSync("password"),
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -66,6 +90,9 @@ module.exports = {
         {
           username: "Noveko",
           email: "eben@gmail.com",
+          userIcon: "silverwing",
+          rank: "Gold",
+          verified: true,
           hashedPassword: bcrypt.hashSync("password"),
           createdAt: new Date(),
           updatedAt: new Date(),
