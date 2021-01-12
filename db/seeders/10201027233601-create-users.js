@@ -22,7 +22,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          username: "wahlu",
+          username: "MomatoMimumu",
           email: "ming@gmail.com",
           hashedPassword: bcrypt.hashSync("password"),
           createdAt: new Date(),

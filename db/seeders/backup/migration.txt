@@ -3,11 +3,11 @@ npx dotenv sequelize-cli db:migrate
 npx dotenv sequelize-cli db:seed:all
 
 npx sequelize-cli model:generate --name User --attributes "username:string, email:string, hashedPassword:string, userIcon:string, rank:string, verified:boolean"
+npx sequelize-cli model:generate --name Follow --attributes "userId:integer, followerId:integer"
 npx sequelize-cli model:generate --name Guide --attributes "title:string, votes:integer, content:json, authorId:integer"
 npx sequelize-cli model:generate --name Board --attributes "title:string, grid:json, authorId:integer, actives:json"
-npx sequelize-cli model:generate --name Guide_Board --attributes "guideId:int, boardId:int, position:integer, subtitle:text"
+npx sequelize-cli model:generate --name Guide_Board --attributes "guideId:integer, boardId:integer, position:integer, subtitle:text"
 npx sequelize-cli model:generate --name Comment --attributes "message:text, userId:integer, guideId:integer"
-npx sequelize-cli model:generate --name Follow --attributes "userId:integer, followerId:integer"
 npx sequelize-cli model:generate --name Bookmark --attributes "guideId:integer, followerId:integer"
 npx sequelize-cli model:generate --name Save --attributes "boardId:integer, followerId:integer"
 

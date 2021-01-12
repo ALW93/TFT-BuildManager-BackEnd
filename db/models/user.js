@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       hashedPassword: DataTypes.STRING,
       userIcon: DataTypes.STRING,
+      rank: DataTypes.STRING,
+      verified: DataTypes.BOOLEAN,
     },
     {}
   );

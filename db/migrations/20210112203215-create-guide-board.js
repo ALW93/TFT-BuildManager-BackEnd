@@ -1,38 +1,24 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Builds', {
+    return queryInterface.createTable('Guide_Boards', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
-        allowNull: false,
-        unique: true,
-        type: Sequelize.STRING
-      },
-      tier: {
-        type: Sequelize.STRING
-      },
-      playstyle: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      votes: {
+      guideId: {
         type: Sequelize.INTEGER
       },
-      notes: {
-        type: Sequelize.TEXT
+      boardId: {
+        type: Sequelize.INTEGER
       },
-      authorId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Users",
-          key: "id",
-        },
+      position: {
+        type: Sequelize.INTEGER
+      },
+      subtitle: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -45,6 +31,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Builds');
+    return queryInterface.dropTable('Guide_Boards');
   }
 };

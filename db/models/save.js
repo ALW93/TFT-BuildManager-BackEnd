@@ -1,11 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Bookmark = sequelize.define('Bookmark', {
-    guideId: DataTypes.INTEGER,
+  const Save = sequelize.define('Save', {
+    boardId: DataTypes.INTEGER,
     followerId: DataTypes.INTEGER
   }, {});
-  Bookmark.associate = function(models) {
+  Save.associate = function(models) {
     // associations can be defined here
   };
-  return Bookmark;
+  return Save;
 };
