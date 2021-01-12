@@ -16,27 +16,11 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   User.associate = function (models) {
-    User.belongsToMany(models.Build, {
-      as: "bookmarks",
-      through: models.Bookmark,
-      foreignKey: "followerId",
-      otherKey: "buildId",
-    });
+    User.hasMany(models.Guide, { foreignKey: "authorId", as: "Author" });
     User.hasMany(models.Board, { foreignKey: "authorId", as: "Author" });
-    User.hasMany(models.Build, { foreignKey: "authorId" });
-    User.hasMany(models.Comment, { foreignKey: "userId" });
-    User.belongsToMany(models.User, {
-      as: "following",
-      through: models.Follow,
-      foreignKey: "userId",
-      otherKey: "followerId",
-    });
-    User.belongsToMany(models.User, {
-      as: "followers",
-      through: models.Follow,
-      foreignKey: "followerId",
-      otherKey: "userId",
-    });
+    User.hasMany(models.Comment, { foreignKey: "authorId", as: "Author" });
+    User.belongsToMany(models.Guide, { through: models.Bookmark });
+    User.belongsToMany(models.User, { through: models.Follow });
   };
 
   User.prototype.validatePassword = function (password) {

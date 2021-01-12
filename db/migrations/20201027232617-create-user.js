@@ -24,12 +24,15 @@ module.exports = {
       },
       userIcon: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       rank: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       verified: {
         type: Sequelize.BOOLEAN,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
