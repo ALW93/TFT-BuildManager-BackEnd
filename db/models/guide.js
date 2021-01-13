@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     Guide.belongsTo(models.User, { foreignKey: "authorId", as: "Author" });
     Guide.hasMany(models.Comment, { foreignKey: "guideId" });
     Guide.hasMany(models.Guide_Board, { foreignKey: "guideId" });
+    Guide.belongsToMany(models.Board, {
+      through: models.Guide_Board,
+      foreignKey: "guideId",
+    });
 
     Guide.belongsToMany(models.User, {
       as: "Bookmarkers",

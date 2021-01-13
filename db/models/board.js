@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
   Board.associate = function (models) {
     Board.belongsTo(models.User, { foreignKey: "authorId", as: "Creator" });
     Board.hasMany(models.Guide_Board, { foreignKey: "boardId" });
+    Board.belongsToMany(models.Guide, {
+      as: "Featured",
+      through: models.Guide_Board,
+      foreignKey: "boardId",
+    });
   };
   return Board;
 };
