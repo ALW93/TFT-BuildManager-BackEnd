@@ -20,7 +20,7 @@ boardRouter.post(
   })
 );
 
-// *** Retrieve all Builds ***
+// *** Retrieve all Boards ***
 boardRouter.get(
   "/",
   asyncHandler(async (req, res) => {

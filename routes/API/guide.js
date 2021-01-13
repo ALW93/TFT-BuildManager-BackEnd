@@ -18,7 +18,7 @@ guideRouter.get(
       where: {
         id: req.params.id,
       },
-      order: [[{ model: Board, as: "SubBoards" }, "position", "desc"]],
+      order: [[{ model: Guide_Board }, "position", "desc"]],
       include: [
         {
           model: User,
@@ -39,8 +39,11 @@ guideRouter.get(
           },
         },
         {
-          model: Board,
-          as: "SubBoards",
+          model: Guide_Board,
+          attributes: ["position"],
+          include: {
+            model: Board,
+          },
         },
       ],
     });
@@ -49,6 +52,5 @@ guideRouter.get(
 );
 
 // *** POST a Guide ***
-guideRouter.post("/");
 
 module.exports = guideRouter;
