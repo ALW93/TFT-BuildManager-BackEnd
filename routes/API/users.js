@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const { getUserToken, requireAuth } = require("../security");
 const { check } = require("express-validator");
 const { asyncHandler, handleValidationErrors } = require("../utility");
-const { User, Build, Bookmark } = require("../../db/models");
+const { User, Guide, Comment, Board } = require("../../db/models");
 
 //#region  Utilities
 
@@ -121,6 +121,23 @@ userRouter.get(
           model: User,
           as: "Following",
           attributes: ["id", "username"],
+        },
+        {
+          model: Guide,
+          as: "Bookmarked",
+          attributes: ["id", "title"],
+        },
+        {
+          model: Guide,
+          as: "Guides",
+          attributes: ["id", "title"],
+        },
+        {
+          model: Board,
+          as: "Boards",
+        },
+        {
+          model: Comment,
         },
       ],
     });

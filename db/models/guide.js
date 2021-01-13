@@ -11,10 +11,19 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Guide.associate = function (models) {
-    Guide.belongsTo(models.User);
+    Guide.belongsTo(models.User, { foreignKey: "authorId" });
     Guide.hasMany(models.Comment, { foreignKey: "guideId" });
-    Guide.belongsToMany(models.Board, { through: "SubBoard" });
-    Guide.belongsToMany(models.User, { through: "Bookmark" });
+
+    Guide.belongsToMany(models.Board, {
+      through: "SubBoards",
+      foreignKey: "guideId",
+    });
+
+    Guide.belongsToMany(models.User, {
+      as: "Hosts",
+      through: "Bookmarks",
+      foreignKey: "guideId",
+    });
   };
   return Guide;
 };

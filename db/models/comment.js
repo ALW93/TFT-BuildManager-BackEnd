@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     "Comment",
     {
       message: DataTypes.TEXT,
-      authorId: DataTypes.INTEGER,
+      userId: DataTypes.INTEGER,
       guideId: DataTypes.INTEGER,
     },
     {}
