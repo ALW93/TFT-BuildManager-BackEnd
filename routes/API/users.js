@@ -6,6 +6,8 @@ const { check } = require("express-validator");
 const { asyncHandler, handleValidationErrors } = require("../utility");
 const { User, Build, Bookmark } = require("../../db/models");
 
+//#region  Utilities
+
 function r(o) {
   o.createdAt = new Date();
   o.updatedAt = new Date();
@@ -26,8 +28,9 @@ const validateEmailAndPassword = [
     .withMessage("Please enter a Password."),
   handleValidationErrors,
 ];
+//#endregion
 
-// POST/user No Create User
+// *** Create New User
 userRouter.post(
   "/",
   validateUsername,
@@ -45,7 +48,7 @@ userRouter.post(
   })
 );
 
-// Put/user/session No Login Validation
+// *** Verify Existing Session ***
 userRouter.put(
   "/session",
   validateEmailAndPassword,
@@ -72,7 +75,7 @@ userRouter.put(
   })
 );
 
-// Delete/user/session No Login Validation
+// *** Remove Session ***
 userRouter.delete(
   "/session",
   requireAuth,
@@ -83,7 +86,7 @@ userRouter.delete(
   })
 );
 
-// GET/user	No Lists all Users with Limited Information
+// *** Returns List of Users Registered ***
 userRouter.get(
   "/",
   asyncHandler(async (req, res) => {
@@ -97,7 +100,7 @@ userRouter.get(
   })
 );
 
-// GET/user/:id	No Finds Specific User Limited Information with Follower Information
+// *** Return Data of Specific User ***
 userRouter.get(
   "/:id",
   asyncHandler(async (req, res) => {
@@ -105,18 +108,25 @@ userRouter.get(
       where: {
         id: req.params.id,
       },
+      attributes: {
+        exclude: ["hashedPassword"],
+      },
       include: [
-        { model: User, as: "followers" },
-        { model: User, as: "following" },
+        {
+          model: User,
+          as: "Followers",
+          attributes: ["id", "username"],
+        },
+        {
+          model: User,
+          as: "Following",
+          attributes: ["id", "username"],
+        },
       ],
     });
 
-    const safeOutput = user.toSafeObject();
-    safeOutput.followers = user.followers;
-    safeOutput.following = user.following;
-
     if (user) {
-      res.json(safeOutput);
+      res.json(user);
     } else {
       res.send("Not Found.");
       next();

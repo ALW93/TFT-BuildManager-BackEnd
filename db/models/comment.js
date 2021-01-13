@@ -4,20 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     "Comment",
     {
       message: DataTypes.TEXT,
-      authorId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: "User",
-          key: "id",
-        },
-      },
-      guideId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: "Guide",
-          key: "id",
-        },
-      },
+      authorId: DataTypes.INTEGER,
+      guideId: DataTypes.INTEGER,
     },
     {}
   );

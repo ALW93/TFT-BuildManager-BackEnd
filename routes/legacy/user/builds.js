@@ -1,7 +1,7 @@
 const express = require("express");
 const buildRouter = express.Router();
-const { requireAuth } = require("../security");
-const { asyncHandler, handleValidationErrors } = require("../utility");
+const { requireAuth } = require("../../security");
+const { asyncHandler, handleValidationErrors } = require("../../utility");
 const {
   Build,
   Comment,
@@ -9,7 +9,7 @@ const {
   Item,
   build_champion,
   build_champion_item,
-} = require("../../db/models");
+} = require("../../../db/models");
 
 function r(o) {
   o.createdAt = new Date();

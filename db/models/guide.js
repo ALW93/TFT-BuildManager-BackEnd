@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   Guide.associate = function (models) {
     Guide.belongsTo(models.User);
     Guide.hasMany(models.Comment, { foreignKey: "guideId" });
-    Guide.belongsToMany(models.Board, { through: models.Guide_Board });
-    Guide.belongsToMany(models.User, { through: models.Bookmark });
+    Guide.belongsToMany(models.Board, { through: "SubBoard" });
+    Guide.belongsToMany(models.User, { through: "Bookmark" });
   };
   return Guide;
 };

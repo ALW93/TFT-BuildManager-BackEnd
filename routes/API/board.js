@@ -1,8 +1,8 @@
 const express = require("express");
 const boardRouter = express.Router();
-const { requireAuth } = require("./security");
-const { asyncHandler } = require("./utility");
-const { Board, User } = require("../db/models");
+const { requireAuth } = require("../security");
+const { asyncHandler } = require("../utility");
+const { Board, User } = require("../../db/models");
 
 function r(o) {
   o.createdAt = new Date();
@@ -27,7 +27,6 @@ boardRouter.get(
     const data = await Board.findAll({
       include: {
         model: User,
-        as: "Author",
         attributes: {
           exclude: ["hashedPassword"],
         },
