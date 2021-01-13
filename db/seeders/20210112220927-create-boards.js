@@ -13,7 +13,6 @@ module.exports = {
           ]),
           authorId: 1,
           actives: JSON.stringify({ Ninja: 4, Assassin: 2 }),
-          position: 0,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

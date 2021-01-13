@@ -26,10 +26,6 @@ module.exports = {
         type: Sequelize.JSONB,
         allowNull: false,
       },
-      position: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

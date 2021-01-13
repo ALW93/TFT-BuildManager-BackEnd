@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
       grid: DataTypes.JSON,
       authorId: DataTypes.INTEGER,
       actives: DataTypes.JSON,
-      position: DataTypes.INTEGER,
       subtitle: DataTypes.TEXT,
     },
     {}

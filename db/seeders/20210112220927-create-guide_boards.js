@@ -8,6 +8,7 @@ module.exports = {
         {
           guideId: 1,
           boardId: 1,
+          position: 0,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

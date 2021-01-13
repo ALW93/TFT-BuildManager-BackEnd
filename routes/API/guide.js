@@ -2,7 +2,7 @@ const express = require("express");
 const guideRouter = express.Router();
 const { requireAuth } = require("../security");
 const { asyncHandler } = require("../utility");
-const { Board, User, Guide, Comment } = require("../../db/models");
+const { Board, User, Guide, Comment, Guide_Board } = require("../../db/models");
 
 function r(o) {
   o.createdAt = new Date();
@@ -47,5 +47,8 @@ guideRouter.get(
     res.status(200).json(data);
   })
 );
+
+// *** POST a Guide ***
+guideRouter.post("/");
 
 module.exports = guideRouter;

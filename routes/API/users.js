@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const { getUserToken, requireAuth } = require("../security");
 const { check } = require("express-validator");
 const { asyncHandler, handleValidationErrors } = require("../utility");
-const { User, Guide, Comment, Board } = require("../../db/models");
+const { User, Guide, Comment, Board, Bookmark } = require("../../db/models");
 
 //#region  Utilities
 
@@ -30,7 +30,7 @@ const validateEmailAndPassword = [
 ];
 //#endregion
 
-// *** Create New User
+// *** Create New User ***
 userRouter.post(
   "/",
   validateUsername,
@@ -38,7 +38,16 @@ userRouter.post(
   asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await User.create(r({ username, email, hashedPassword }));
+    const newUser = await User.create(
+      r({
+        username: username,
+        email: email,
+        hashedPassword: hashedPassword,
+        userIcon: "none",
+        rank: "unranked",
+        verified: false,
+      })
+    );
     await newUser.save();
     const token = getUserToken(newUser);
 
@@ -48,7 +57,7 @@ userRouter.post(
   })
 );
 
-// *** Verify Existing Session ***
+// *** Login and Create Session ***
 userRouter.put(
   "/session",
   validateEmailAndPassword,
@@ -102,7 +111,7 @@ userRouter.get(
 
 // *** Return Data of Specific User ***
 userRouter.get(
-  "/:id",
+  "/id/:id",
   asyncHandler(async (req, res) => {
     const user = await User.findOne({
       where: {
@@ -135,6 +144,7 @@ userRouter.get(
         {
           model: Board,
           as: "Boards",
+          attributes: ["id"],
         },
         {
           model: Comment,
@@ -151,93 +161,27 @@ userRouter.get(
   })
 );
 
-// GET/user/:id/builds No Find Specific User's Builds
-userRouter.get(
-  "/:id/builds",
-  asyncHandler(async (req, res, next) => {
-    const user = await User.findOne({
-      where: {
-        id: req.params.id,
-      },
-      include: "Builds",
-    });
-
-    if (user) {
-      const output = user.Builds.map((b) => b.id);
-      res.json({ builds: output });
-    } else {
-      res.send("No Builds Found.");
-      next();
-    }
-  })
-);
-
-// GET/user/:id/comments	No	Find Specific User's Posted Comments
-userRouter.get(
-  "/:id/comments",
-  asyncHandler(async (req, res, next) => {
-    const user = await User.findOne({
-      where: {
-        id: req.params.id,
-      },
-      include: "Comments",
-    });
-
-    if (user) {
-      res.json(user.Comments);
-    } else {
-      res.send("User has not posted any comments yet!");
-      next();
-    }
-  })
-);
-
-// GET/user/:id/bookmarks	No	Find Specific User's Bookmarks
-userRouter.get(
-  "/:id/bookmarks",
-  asyncHandler(async (req, res, next) => {
-    const user = await User.findOne({
-      where: {
-        id: req.params.id,
-      },
-      include: [{ model: Build, as: "bookmarks" }],
-    });
-
-    if (user) {
-      res.json({ bookmarks: user.bookmarks });
-    } else {
-      res.send("No Bookmarks Found.");
-      next();
-    }
-  })
-);
-
-// POST/user/:id/bookmarks	Yes	Create Bookmark
+// *** Add a Bookmark ***
 userRouter.post(
   "/:id/bookmarks",
   requireAuth,
   asyncHandler(async (req, res) => {
-    const { buildId } = req.body;
-    await Bookmark.create(r({ buildId, followerId: req.params.id }));
-    res.status(201).send("New Bookmark Successfully Added!");
+    const { guideId } = req.body;
+    await Bookmark.create(r({ guideId, followerId: req.params.id }));
+    res.status(201).send("Bookmark Added!");
   })
 );
 
-// DELETE/user/:id/bookmarks	Yes	Delete Bookmark
+// *** Remove Bookmark ***
 userRouter.delete(
   "/:id/bookmarks",
   requireAuth,
   asyncHandler(async (req, res) => {
-    const { buildId } = req.body;
-    const removeBookmark = await Bookmark.findOne({
+    const { guideId } = req.body;
+    await Bookmark.destroy({
       where: {
-        buildId: buildId,
+        guideId: guideId,
         followerId: req.params.id,
-      },
-    });
-    await removeBookmark.destroy({
-      where: {
-        removeBookmark,
       },
     });
     res.status(201).send("Bookmark Successfully Removed!");

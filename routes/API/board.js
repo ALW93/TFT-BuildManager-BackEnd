@@ -36,23 +36,16 @@ boardRouter.get(
   })
 );
 
-// *** Retrieve all Editor Guides ***
+// *** Retrieve all Editor Boards ***
 boardRouter.get(
   "/meta",
   asyncHandler(async (req, res) => {
-    const data = await Guide.findAll({
+    const data = await Board.findAll({
       where: {
         authorId: 1,
       },
       attributes: {
-        exclude: ["content", "authorId"],
-      },
-      include: {
-        model: User,
-        as: "Author",
-        attributes: {
-          exclude: ["hashedPassword"],
-        },
+        exclude: ["grid", "authorId"],
       },
     });
     res.status(200).json(data);
