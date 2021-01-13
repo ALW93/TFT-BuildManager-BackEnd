@@ -2,7 +2,7 @@ const express = require("express");
 const boardRouter = express.Router();
 const { requireAuth } = require("../security");
 const { asyncHandler } = require("../utility");
-const { Board, User } = require("../../db/models");
+const { Board, User, Guide } = require("../../db/models");
 
 function r(o) {
   o.createdAt = new Date();
@@ -36,13 +36,16 @@ boardRouter.get(
   })
 );
 
-// *** Retrieve all Editor Builds ***
+// *** Retrieve all Editor Guides ***
 boardRouter.get(
   "/meta",
   asyncHandler(async (req, res) => {
-    const data = await Board.findAll({
+    const data = await Guide.findAll({
       where: {
         authorId: 1,
+      },
+      attributes: {
+        exclude: ["content", "authorId"],
       },
       include: {
         model: User,
@@ -65,13 +68,29 @@ boardRouter.get(
         id: req.params.id,
       },
 
-      include: {
-        model: User,
-        as: "Author",
-        attributes: {
-          exclude: ["hashedPassword"],
+      include: [
+        {
+          model: User,
+          as: "Creator",
+          attributes: {
+            exclude: ["hashedPassword"],
+          },
         },
-      },
+        {
+          model: Guide,
+          as: "Featured",
+          attributes: {
+            exclude: ["content"],
+          },
+          include: {
+            model: User,
+            as: "Author",
+            attributes: {
+              exclude: ["hashedPassword"],
+            },
+          },
+        },
+      ],
     });
     res.status(200).json(data);
   })

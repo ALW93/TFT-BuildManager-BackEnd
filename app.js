@@ -8,6 +8,7 @@ const bearerToken = require("express-bearer-token");
 const indexRouter = require("./routes/index");
 const userRouter = require("./routes/API/users");
 const boardRouter = require("./routes/API/board");
+const guideRouter = require("./routes/API/guide");
 
 app.use(bearerToken());
 app.use(morgan("dev"));
@@ -19,6 +20,7 @@ app.options("/", cors());
 app.use("/", indexRouter);
 app.use("/users", userRouter);
 app.use("/boards", boardRouter);
+app.use("/guides", guideRouter);
 
 app.use(express.static(path.join(__dirname, "public")));
 
