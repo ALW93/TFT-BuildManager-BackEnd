@@ -27,6 +27,7 @@ boardRouter.get(
     const data = await Board.findAll({
       include: {
         model: User,
+        as: "Creator",
         attributes: {
           exclude: ["hashedPassword"],
         },
