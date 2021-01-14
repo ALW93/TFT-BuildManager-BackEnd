@@ -4,15 +4,21 @@ module.exports = (sequelize, DataTypes) => {
     "Board",
     {
       title: DataTypes.STRING,
-      board: DataTypes.JSON,
-      votes: DataTypes.INTEGER,
-      guide: DataTypes.TEXT,
+      grid: DataTypes.JSON,
       authorId: DataTypes.INTEGER,
+      actives: DataTypes.JSON,
+      subtitle: DataTypes.TEXT,
     },
     {}
   );
   Board.associate = function (models) {
-    Board.belongsTo(models.User, { foreignKey: "authorId", as: "Author" });
+    Board.belongsTo(models.User, { foreignKey: "authorId", as: "Creator" });
+    Board.hasMany(models.Guide_Board, { foreignKey: "boardId" });
+    Board.belongsToMany(models.Guide, {
+      as: "Featured",
+      through: models.Guide_Board,
+      foreignKey: "boardId",
+    });
   };
   return Board;
 };

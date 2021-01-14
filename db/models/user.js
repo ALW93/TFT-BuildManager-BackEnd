@@ -10,30 +10,30 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       hashedPassword: DataTypes.STRING,
       userIcon: DataTypes.STRING,
+      rank: DataTypes.STRING,
+      verified: DataTypes.BOOLEAN,
     },
     {}
   );
   User.associate = function (models) {
-    User.belongsToMany(models.Build, {
-      as: "bookmarks",
-      through: models.Bookmark,
-      foreignKey: "followerId",
-      otherKey: "buildId",
-    });
-    User.hasMany(models.Board, { foreignKey: "authorId", as: "Author" });
-    User.hasMany(models.Build, { foreignKey: "authorId" });
+    User.hasMany(models.Guide, { foreignKey: "authorId" });
+    User.hasMany(models.Board, { foreignKey: "authorId" });
     User.hasMany(models.Comment, { foreignKey: "userId" });
+    User.belongsToMany(models.Guide, {
+      as: "Bookmarked",
+      through: "Bookmarks",
+      foreignKey: "followerId",
+    });
+
     User.belongsToMany(models.User, {
-      as: "following",
-      through: models.Follow,
+      as: "Followers",
+      through: "Follows",
       foreignKey: "userId",
-      otherKey: "followerId",
     });
     User.belongsToMany(models.User, {
-      as: "followers",
-      through: models.Follow,
+      as: "Following",
+      through: "Follows",
       foreignKey: "followerId",
-      otherKey: "userId",
     });
   };
 
