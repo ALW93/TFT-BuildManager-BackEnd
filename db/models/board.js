@@ -19,6 +19,11 @@ module.exports = (sequelize, DataTypes) => {
       through: models.Guide_Board,
       foreignKey: "boardId",
     });
+    Board.belongsToMany(models.User, {
+      as: "Saved_By",
+      through: "Saves",
+      foreignKey: "boardId",
+    });
   };
   return Board;
 };
