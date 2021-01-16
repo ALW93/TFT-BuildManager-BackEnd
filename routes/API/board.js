@@ -79,6 +79,7 @@ boardRouter.get(
             author: board.Creator.username,
             feature_count: board.Featured.length,
             save_count: board.Saved_By.length,
+            cover: board.grid.filter((e) => e.items && e.items.length === 3),
           }
         );
       });
