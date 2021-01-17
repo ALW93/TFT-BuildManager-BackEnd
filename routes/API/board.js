@@ -4,7 +4,6 @@ const { requireAuth } = require("../security");
 const { asyncHandler } = require("../utility");
 const { Board, User, Guide } = require("../../db/models");
 const db = require("../../db/models/index");
-const sequelize = db.sequelize;
 
 function r(o) {
   o.createdAt = new Date();
