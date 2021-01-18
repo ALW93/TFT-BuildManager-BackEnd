@@ -5,6 +5,7 @@ const { getUserToken, requireAuth } = require("../security");
 const { check } = require("express-validator");
 const { asyncHandler, handleValidationErrors } = require("../utility");
 const { User, Guide, Comment, Board, Bookmark } = require("../../db/models");
+const { DateTime } = require("luxon");
 
 //#region  Utilities
 
@@ -113,7 +114,7 @@ userRouter.get(
 userRouter.get(
   "/id/:id",
   asyncHandler(async (req, res) => {
-    const user = await User.findOne({
+    await User.findOne({
       where: {
         id: req.params.id,
       },
@@ -124,40 +125,60 @@ userRouter.get(
         {
           model: User,
           as: "Followers",
-          attributes: ["id", "username"],
+          attributes: ["id"],
         },
         {
           model: User,
           as: "Following",
-          attributes: ["id", "username"],
-        },
-        {
-          model: Guide,
-          as: "Bookmarked",
-          attributes: ["id", "title"],
+          attributes: ["id"],
         },
         {
           model: Guide,
           as: "Guides",
-          attributes: ["id", "title"],
         },
         {
           model: Board,
           as: "Boards",
-          attributes: ["id"],
         },
         {
           model: Comment,
         },
       ],
+    }).then((e) => {
+      const resObj = Object.assign(
+        {},
+        {
+          id: e.id,
+          username: e.username,
+          icon: e.userIcon,
+          rank: e.rank,
+          verified: e.verified,
+          joined: new DateTime(e.createdAt).toLocaleString(DateTime.DATE_FULL),
+          followerCount: e.Followers.length,
+          followingCount: e.Following.length,
+          guides: e.Guides.map((g) => {
+            return Object.assign(
+              {},
+              { id: g.id, title: g.title, votes: e.votes }
+            );
+          }),
+          boards: e.Boards.map((b) => {
+            return Object.assign(
+              {},
+              {
+                id: b.id,
+                title: b.title,
+                subtitle: b.subtitle,
+                grid: b.grid,
+                actives: b.actives,
+              }
+            );
+          }),
+          comments: e.Comments,
+        }
+      );
+      res.status(200).json(resObj);
     });
-
-    if (user) {
-      res.json(user);
-    } else {
-      res.send("Not Found.");
-      next();
-    }
   })
 );
 
