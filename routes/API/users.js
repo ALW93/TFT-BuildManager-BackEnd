@@ -141,6 +141,10 @@ userRouter.get(
           as: "Boards",
         },
         {
+          model: Board,
+          as: "Savers",
+        },
+        {
           model: Comment,
         },
       ],
@@ -162,7 +166,7 @@ userRouter.get(
               { id: g.id, title: g.title, votes: e.votes }
             );
           }),
-          boards: e.Boards.map((b) => {
+          boards: [...e.Boards, ...e.Savers].map((b) => {
             return Object.assign(
               {},
               {
