@@ -67,22 +67,20 @@ boardRouter.get(
         },
       ],
     }).then((boards) => {
-      const resObj = boards.map((board) => {
-        return Object.assign(
-          {},
-          {
-            id: board.id,
-            title: board.title,
-            subtitle: board.subtitle,
-            grid: board.grid,
-            actives: board.actives,
-            author: board.Creator.username,
-            feature_count: board.Featured.length,
-            save_count: board.Saved_By.length,
-            cover: board.grid.filter((e) => e.items && e.items.length === 3),
-          }
-        );
+      const resObj = {};
+      boards.forEach((board) => {
+        resObj[board.id] = {
+          title: board.title,
+          subtitle: board.subtitle,
+          grid: board.grid,
+          actives: board.actives,
+          author: board.Creator.username,
+          feature_count: board.Featured.length,
+          save_count: board.Saved_By.length,
+          cover: board.grid.filter((e) => e.items && e.items.length === 3),
+        };
       });
+
       res.status(200).json(resObj);
     });
   })
@@ -116,21 +114,18 @@ boardRouter.get(
         },
       ],
     }).then((boards) => {
-      const resObj = boards.map((board) => {
-        return Object.assign(
-          {},
-          {
-            id: board.id,
-            title: board.title,
-            subtitle: board.subtitle,
-            grid: board.grid,
-            actives: board.actives,
-            author: board.Creator.username,
-            feature_count: board.Featured.length,
-            save_count: board.Saved_By.length,
-            cover: board.grid.filter((e) => e.items && e.items.length === 3),
-          }
-        );
+      const resObj = {};
+      boards.forEach((board) => {
+        resObj[board.id] = {
+          title: board.title,
+          subtitle: board.subtitle,
+          grid: board.grid,
+          actives: board.actives,
+          author: board.Creator.username,
+          feature_count: board.Featured.length,
+          save_count: board.Saved_By.length,
+          cover: board.grid.filter((e) => e.items && e.items.length === 3),
+        };
       });
       res.status(200).json(resObj);
     });

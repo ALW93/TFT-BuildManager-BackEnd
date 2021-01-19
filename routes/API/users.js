@@ -166,18 +166,18 @@ userRouter.get(
               { id: g.id, title: g.title, votes: e.votes }
             );
           }),
-          boards: [...e.Boards, ...e.Savers].map((b) => {
-            return Object.assign(
-              {},
-              {
-                id: b.id,
+          boards: (() => {
+            const resObj = {};
+            [...e.Boards, ...e.Savers].forEach((b) => {
+              resObj[b.id] = {
                 title: b.title,
                 subtitle: b.subtitle,
                 grid: b.grid,
                 actives: b.actives,
-              }
-            );
-          }),
+              };
+            });
+            return resObj;
+          })(),
           comments: e.Comments,
         }
       );
