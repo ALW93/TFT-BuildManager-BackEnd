@@ -179,7 +179,7 @@ boardRouter.delete(
         id: req.params.id,
       },
     });
-    res.status(201).send("Board Succesfully Deleted!");
+    res.status(201).send("Board Succesfully");
   })
 );
 

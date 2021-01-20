@@ -3,7 +3,6 @@ const guideRouter = express.Router();
 const { requireAuth } = require("../security");
 const { asyncHandler } = require("../utility");
 const { Board, User, Guide, Comment, Guide_Board } = require("../../db/models");
-const { response } = require("express");
 
 function r(o) {
   o.createdAt = new Date();
@@ -15,12 +14,27 @@ function r(o) {
 guideRouter.post(
   "/",
   asyncHandler(async (req, res) => {
-    const { guide, title, id } = req.body;
+    const { guide, title, id, boards } = req.body;
     const newGuide = await Guide.create(
       r({ title: title, votes: 0, authorId: id, content: guide })
     );
-    const guideId = newGuide.id;
-    // TODO: Map through Boards and Create Join Table Rows
+    boards.map(async (board, idx) => {
+      let boardId;
+      if (!board.id) {
+        var newBoard = await Board.create(r(board));
+        boardId = newBoard.dataValues.id;
+      } else {
+        boardId = board.id;
+      }
+      await Guide_Board.create(
+        r({
+          guideId: newGuide.dataValues.id,
+          boardId: boardId,
+          position: idx,
+        })
+      );
+    });
+    console.log("****** NEW GUIDE", newGuide.dataValues);
     res.status(200).json(newGuide);
   })
 );
