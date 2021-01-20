@@ -128,6 +128,20 @@ userRouter.get(
         {
           model: Guide,
           as: "Guides",
+          include: {
+            model: User,
+            as: "Author",
+            attributes: ["username"],
+          },
+        },
+        {
+          model: Guide,
+          as: "Bookmarked",
+          include: {
+            model: User,
+            as: "Author",
+            attributes: ["username"],
+          },
         },
         {
           model: Board,
@@ -181,12 +195,21 @@ userRouter.get(
             followerCount: e.Followers.length,
             followingCount: e.Following.length,
           },
-          guides: e.Guides.map((g) => {
-            return Object.assign(
-              {},
-              { id: g.id, title: g.title, votes: e.votes }
-            );
-          }),
+          guides: (() => {
+            const resObj = {};
+            [...e.Guides, ...e.Bookmarked].forEach((guide) => {
+              resObj[guide.id] = {
+                title: guide.title,
+                votes: guide.votes,
+                lastUpdated: new DateTime(e.createdAt).toLocaleString(
+                  DateTime.DATE_FULL
+                ),
+                authorId: guide.authorId,
+                author: guide.Author.username,
+              };
+            });
+            return resObj;
+          })(),
           boards: (() => {
             const resObj = {};
             [...e.Boards, ...e.Savers].forEach((board) => {

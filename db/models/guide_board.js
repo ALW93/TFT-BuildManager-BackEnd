@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   Guide_Board.associate = function (models) {
     Guide_Board.belongsTo(models.Guide, { foreignKey: "guideId" });
-    Guide_Board.hasMany(models.Board, { foreignKey: "id" });
+    Guide_Board.belongsTo(models.Board, { foreignKey: "boardId" });
   };
   return Guide_Board;
 };
