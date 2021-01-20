@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       votes: DataTypes.INTEGER,
       content: DataTypes.JSON,
       authorId: DataTypes.INTEGER,
+      // boardId: DataTypes.INTEGER,
     },
     {}
   );
@@ -24,6 +25,8 @@ module.exports = (sequelize, DataTypes) => {
       through: "Bookmarks",
       foreignKey: "guideId",
     });
+
+    // Guide.hasOne(models.Board, { foreignKey: "boardId" });
   };
   return Guide;
 };

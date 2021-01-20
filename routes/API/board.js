@@ -72,6 +72,7 @@ boardRouter.get(
         resObj[board.id] = {
           title: board.title,
           subtitle: board.subtitle,
+          authorId: board.authorId,
           grid: board.grid,
           actives: board.actives,
           author: board.Creator.username,
@@ -119,6 +120,7 @@ boardRouter.get(
         resObj[board.id] = {
           title: board.title,
           subtitle: board.subtitle,
+          authorId: board.authorId,
           grid: board.grid,
           actives: board.actives,
           author: board.Creator.username,

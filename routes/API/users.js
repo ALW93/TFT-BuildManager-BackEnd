@@ -4,7 +4,14 @@ const bcrypt = require("bcryptjs");
 const { getUserToken, requireAuth } = require("../security");
 const { check } = require("express-validator");
 const { asyncHandler, handleValidationErrors } = require("../utility");
-const { User, Guide, Comment, Board, Bookmark } = require("../../db/models");
+const {
+  User,
+  Guide,
+  Comment,
+  Board,
+  Bookmark,
+  Save,
+} = require("../../db/models");
 const { DateTime } = require("luxon");
 
 //#region  Utilities
@@ -96,20 +103,6 @@ userRouter.delete(
   })
 );
 
-// *** Returns List of Users Registered ***
-userRouter.get(
-  "/",
-  asyncHandler(async (req, res) => {
-    try {
-      const data = await User.findAll();
-      const UserDatabase = data.map((u) => u.toSafeObject());
-      res.json({ UserDatabase });
-    } catch (e) {
-      return console.error(e);
-    }
-  })
-);
-
 // *** Return Data of Specific User ***
 userRouter.get(
   "/id/:id",
@@ -139,10 +132,34 @@ userRouter.get(
         {
           model: Board,
           as: "Boards",
+          include: [
+            {
+              model: Guide,
+              as: "Featured",
+              attributes: ["id"],
+            },
+            {
+              model: User,
+              as: "Saved_By",
+              attributes: ["id"],
+            },
+          ],
         },
         {
           model: Board,
           as: "Savers",
+          include: [
+            {
+              model: Guide,
+              as: "Featured",
+              attributes: ["id"],
+            },
+            {
+              model: User,
+              as: "Saved_By",
+              attributes: ["id"],
+            },
+          ],
         },
         {
           model: Comment,
@@ -168,12 +185,18 @@ userRouter.get(
           }),
           boards: (() => {
             const resObj = {};
-            [...e.Boards, ...e.Savers].forEach((b) => {
-              resObj[b.id] = {
-                title: b.title,
-                subtitle: b.subtitle,
-                grid: b.grid,
-                actives: b.actives,
+            [...e.Boards, ...e.Savers].forEach((board) => {
+              resObj[board.id] = {
+                title: board.title,
+                subtitle: board.subtitle,
+                authorId: board.authorId,
+                grid: board.grid,
+                actives: board.actives,
+                feature_count: board.Featured.length,
+                save_count: board.Saved_By.length,
+                cover: board.grid.filter(
+                  (e) => e.items && e.items.length === 3
+                ),
               };
             });
             return resObj;
@@ -210,6 +233,33 @@ userRouter.delete(
       },
     });
     res.status(201).send("Bookmark Successfully Removed!");
+  })
+);
+
+// *** Add a Board to Collection ***
+userRouter.post(
+  "/id/:id/boards",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { boardId } = req.body;
+    await Save.create(r({ boardId: boardId, followerId: req.params.id }));
+    res.status(200).send("Board added to Collection!");
+  })
+);
+
+// *** Remove a Board from Collection  ***
+userRouter.delete(
+  "/id/:id/boards",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { boardId } = req.body;
+    await Save.destroy({
+      where: {
+        boardId: boardId,
+        followerId: req.params.id,
+      },
+    });
+    res.status(201).send("Board Successfully Removed from Collection!");
   })
 );
 

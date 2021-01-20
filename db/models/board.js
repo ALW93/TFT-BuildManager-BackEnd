@@ -24,6 +24,11 @@ module.exports = (sequelize, DataTypes) => {
       through: "Saves",
       foreignKey: "boardId",
     });
+
+    // Board.belongsTo(models.Guide, {
+    //   foreignKey: "boardId",
+    //   as: "Featured_Board",
+    // });
   };
   return Board;
 };
