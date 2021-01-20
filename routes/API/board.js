@@ -39,7 +39,6 @@ boardRouter.get(
 );
 
 // *** Retrieve all Community Boards ***
-
 boardRouter.get(
   "/community",
   asyncHandler(async (req, res) => {
@@ -168,6 +167,19 @@ boardRouter.get(
       ],
     });
     res.status(200).json(data);
+  })
+);
+
+// *** Delete a Board
+boardRouter.delete(
+  "/id/:id",
+  asyncHandler(async (req, res) => {
+    await Board.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(201).send("Board Succesfully Deleted!");
   })
 );
 
