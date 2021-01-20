@@ -169,14 +169,18 @@ userRouter.get(
       const resObj = Object.assign(
         {},
         {
-          id: e.id,
-          username: e.username,
-          icon: e.userIcon,
-          rank: e.rank,
-          verified: e.verified,
-          joined: new DateTime(e.createdAt).toLocaleString(DateTime.DATE_FULL),
-          followerCount: e.Followers.length,
-          followingCount: e.Following.length,
+          user: {
+            id: e.id,
+            username: e.username,
+            icon: e.userIcon,
+            rank: e.rank,
+            verified: e.verified,
+            joined: new DateTime(e.createdAt).toLocaleString(
+              DateTime.DATE_FULL
+            ),
+            followerCount: e.Followers.length,
+            followingCount: e.Following.length,
+          },
           guides: e.Guides.map((g) => {
             return Object.assign(
               {},
