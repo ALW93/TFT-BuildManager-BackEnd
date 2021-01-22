@@ -47,7 +47,7 @@ guideRouter.get(
       where: {
         id: req.params.id,
       },
-      order: [[{ model: Guide_Board }, "position", "desc"]],
+      order: [[{ model: Guide_Board }, "position", "asc"]],
       include: [
         {
           model: User,
