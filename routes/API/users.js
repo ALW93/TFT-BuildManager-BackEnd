@@ -57,7 +57,7 @@ userRouter.post(
       })
     );
     await newUser.save();
-    const token = getUserToken(newUser);
+    const { token } = getUserToken(newUser);
 
     if (newUser) {
       res.json({ user: newUser.toSafeObject(), token });
