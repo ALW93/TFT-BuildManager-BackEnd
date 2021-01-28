@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       votes: DataTypes.INTEGER,
       content: DataTypes.JSON,
       authorId: DataTypes.INTEGER,
+      cover: DataTypes.STRING,
       // boardId: DataTypes.INTEGER,
     },
     {}

@@ -24,10 +24,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      // boardId: {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: true,
-      // },
+      cover: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
