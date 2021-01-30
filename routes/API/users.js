@@ -123,6 +123,10 @@ userRouter.get(
           as: "Boards",
         },
         {
+          model: Board,
+          as: "Bookmarkers",
+        },
+        {
           model: Comment,
         },
       ],
@@ -145,7 +149,7 @@ userRouter.get(
 
           boards: (() => {
             const resObj = {};
-            e.Boards.forEach((board) => {
+            [...e.Boards, ...e.Bookmarkers].forEach((board) => {
               resObj[board.id] = {
                 title: board.title,
                 subtitle: board.subtitle,
