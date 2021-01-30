@@ -6,13 +6,13 @@ module.exports = {
       "Bookmarks",
       [
         {
-          guideId: 1,
+          boardId: 1,
           followerId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          guideId: 1,
+          boardId: 1,
           followerId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),

@@ -3,12 +3,14 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
-      "Guide_Boards",
+      "SubBoards",
       [
         {
           guideId: 1,
           boardId: 1,
-          position: 0,
+          title: "Some Board",
+          subtitle: 'Some subtitle',
+          grid: {},
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -18,6 +20,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("Guide_Boards", null, {});
+    return queryInterface.bulkDelete("SubBoards", null, {});
   },
 };

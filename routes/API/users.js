@@ -125,24 +125,8 @@ userRouter.get(
           as: "Following",
           attributes: ["id"],
         },
-        {
-          model: Guide,
-          as: "Guides",
-          include: {
-            model: User,
-            as: "Author",
-            attributes: ["username"],
-          },
-        },
-        {
-          model: Guide,
-          as: "Bookmarked",
-          include: {
-            model: User,
-            as: "Author",
-            attributes: ["username"],
-          },
-        },
+
+
         {
           model: Board,
           as: "Boards",

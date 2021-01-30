@@ -8,14 +8,14 @@ module.exports = {
         {
           message: "Nice Guide",
           userId: 2,
-          guideId: 1,
+          boardId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           message: "Added to my Bookmarks!",
           userId: 4,
-          guideId: 1,
+          boardId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
