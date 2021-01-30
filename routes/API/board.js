@@ -48,21 +48,11 @@ boardRouter.get(
       },
       include: [
         {
-          model: Guide,
-          as: "Featured",
-          attributes: ["id"],
-        },
-        {
           model: User,
           as: "Creator",
           attributes: {
             exclude: "hashedPassword",
           },
-        },
-        {
-          model: User,
-          as: "Saved_By",
-          attributes: ["id"],
         },
       ],
     }).then((boards) => {
@@ -75,12 +65,9 @@ boardRouter.get(
           grid: board.grid,
           actives: board.actives,
           author: board.Creator.username,
-          feature_count: board.Featured.length,
-          save_count: board.Saved_By.length,
           cover: board.grid.filter((e) => e.items && e.items.length === 3),
         };
       });
-
       res.status(200).json(resObj);
     });
   })
@@ -96,21 +83,11 @@ boardRouter.get(
       },
       include: [
         {
-          model: Guide,
-          as: "Featured",
-          attributes: ["id"],
-        },
-        {
           model: User,
           as: "Creator",
           attributes: {
             exclude: "hashedPassword",
           },
-        },
-        {
-          model: User,
-          as: "Saved_By",
-          attributes: ["id"],
         },
       ],
     }).then((boards) => {
@@ -123,8 +100,6 @@ boardRouter.get(
           grid: board.grid,
           actives: board.actives,
           author: board.Creator.username,
-          feature_count: board.Featured.length,
-          save_count: board.Saved_By.length,
           cover: board.grid.filter((e) => e.items && e.items.length === 3),
         };
       });

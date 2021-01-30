@@ -3,14 +3,15 @@ module.exports = (sequelize, DataTypes) => {
   const SubBoard = sequelize.define(
     "SubBoard",
     {
-      position: DataTypes.INTEGER,
-      guideId: DataTypes.INTEGER,
+      title: DataTypes.STRING,
+      grid: DataTypes.JSON,
+      actives: DataTypes.JSON,
+      subtitle: DataTypes.TEXT,
       boardId: DataTypes.INTEGER,
     },
     {}
   );
   SubBoard.associate = function (models) {
-    SubBoard.belongsTo(models.Guide, { foreignKey: "guideId" });
     SubBoard.belongsTo(models.Board, { foreignKey: "boardId" });
   };
   return SubBoard;

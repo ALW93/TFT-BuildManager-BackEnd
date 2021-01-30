@@ -6,11 +6,17 @@ module.exports = {
       "SubBoards",
       [
         {
-          guideId: 1,
           boardId: 1,
           title: "Some Board",
-          subtitle: 'Some subtitle',
-          grid: {},
+          subtitle: "Some subtitle",
+          actives: JSON.stringify({}),
+          grid: JSON.stringify([
+            {
+              id: "TFT4_Olaf",
+              items: ["RH", "DB", "GA"],
+              position: 0,
+            },
+          ]),
           createdAt: new Date(),
           updatedAt: new Date(),
         },

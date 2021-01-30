@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
     Board.belongsTo(models.User, { foreignKey: "authorId", as: "Creator" });
     Board.hasMany(models.SubBoard, {
       foreignKey: "boardId",
-
     });
 
     Board.belongsToMany(models.User, {
@@ -23,7 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       through: "Bookmark",
       foreignKey: "boardId",
     });
-
   };
   return Board;
 };

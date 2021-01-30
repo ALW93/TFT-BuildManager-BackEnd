@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("SubBoard", {
+    return queryInterface.createTable("SubBoards", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,15 +13,19 @@ module.exports = {
         allowNull: false,
       },
       title: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       subtitle: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       grid: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.JSON,
+        allowNull: false,
+      },
+      actives: {
+        type: Sequelize.JSON,
         allowNull: false,
       },
       createdAt: {
@@ -35,6 +39,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("SubBoard");
+    return queryInterface.dropTable("SubBoards");
   },
 };

@@ -125,39 +125,9 @@ userRouter.get(
           as: "Following",
           attributes: ["id"],
         },
-
-
         {
           model: Board,
           as: "Boards",
-          include: [
-            {
-              model: Guide,
-              as: "Featured",
-              attributes: ["id"],
-            },
-            {
-              model: User,
-              as: "Saved_By",
-              attributes: ["id"],
-            },
-          ],
-        },
-        {
-          model: Board,
-          as: "Savers",
-          include: [
-            {
-              model: Guide,
-              as: "Featured",
-              attributes: ["id"],
-            },
-            {
-              model: User,
-              as: "Saved_By",
-              attributes: ["id"],
-            },
-          ],
         },
         {
           model: Comment,
@@ -179,32 +149,16 @@ userRouter.get(
             followerCount: e.Followers.length,
             followingCount: e.Following.length,
           },
-          guides: (() => {
-            const resObj = {};
-            [...e.Guides, ...e.Bookmarked].forEach((guide) => {
-              resObj[guide.id] = {
-                title: guide.title,
-                votes: guide.votes,
-                lastUpdated: new DateTime(e.createdAt).toLocaleString(
-                  DateTime.DATE_FULL
-                ),
-                authorId: guide.authorId,
-                author: guide.Author.username,
-              };
-            });
-            return resObj;
-          })(),
+
           boards: (() => {
             const resObj = {};
-            [...e.Boards, ...e.Savers].forEach((board) => {
+            e.Boards.forEach((board) => {
               resObj[board.id] = {
                 title: board.title,
                 subtitle: board.subtitle,
                 authorId: board.authorId,
                 grid: board.grid,
                 actives: board.actives,
-                feature_count: board.Featured.length,
-                save_count: board.Saved_By.length,
                 cover: board.grid.filter(
                   (e) => e.items && e.items.length === 3
                 ),
@@ -212,7 +166,7 @@ userRouter.get(
             });
             return resObj;
           })(),
-          comments: e.Comments,
+          comments: e.Comment,
         }
       );
       res.status(200).json(resObj);
