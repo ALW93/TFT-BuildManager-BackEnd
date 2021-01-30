@@ -80,7 +80,6 @@ boardRouter.get(
           grid: sort(board.grid),
           actives: board.actives,
           author: board.Creator.username,
-          cover: board.grid.filter((e) => e.items && e.items.length === 3),
         };
       });
 
@@ -116,7 +115,6 @@ boardRouter.get(
           grid: sort(board.grid),
           actives: board.actives,
           author: board.Creator.username,
-          cover: board.grid.filter((e) => e.items && e.items.length === 3),
         };
       });
       res.status(200).json(resObj);

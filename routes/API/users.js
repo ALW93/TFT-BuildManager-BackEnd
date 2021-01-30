@@ -4,14 +4,7 @@ const bcrypt = require("bcryptjs");
 const { getUserToken, requireAuth } = require("../security");
 const { check } = require("express-validator");
 const { asyncHandler, handleValidationErrors } = require("../utility");
-const {
-  User,
-  Guide,
-  Comment,
-  Board,
-  Bookmark,
-  Save,
-} = require("../../db/models");
+const { User, Comment, Board, Bookmark } = require("../../db/models");
 const { DateTime } = require("luxon");
 
 //#region  Utilities
@@ -179,8 +172,8 @@ userRouter.post(
   "/:id/bookmarks",
   requireAuth,
   asyncHandler(async (req, res) => {
-    const { guideId } = req.body;
-    await Bookmark.create(r({ guideId, followerId: req.params.id }));
+    const { boardId } = req.body;
+    await Bookmark.create(r({ boardId, followerId: req.params.id }));
     res.status(201).send("Bookmark Added!");
   })
 );
@@ -204,10 +197,11 @@ userRouter.delete(
 // *** Add a Board to Collection ***
 userRouter.post(
   "/id/:id/boards",
-  requireAuth,
+
   asyncHandler(async (req, res) => {
     const { boardId } = req.body;
-    await Save.create(r({ boardId: boardId, followerId: req.params.id }));
+    console.log("HITTING THIS", req.params.id);
+    await Bookmark.create(r({ boardId: boardId, followerId: req.params.id }));
     res.status(200).send("Board added to Collection!");
   })
 );
@@ -218,7 +212,7 @@ userRouter.delete(
   requireAuth,
   asyncHandler(async (req, res) => {
     const { boardId } = req.body;
-    await Save.destroy({
+    await Bookmark.destroy({
       where: {
         boardId: boardId,
         followerId: req.params.id,
