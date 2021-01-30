@@ -1,22 +1,26 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Guide_Boards", {
+    return queryInterface.createTable("SubBoard", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      guideId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
       boardId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      position: {
+      title: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      subtitle: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      grid: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -31,6 +35,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("Guide_Boards");
+    return queryInterface.dropTable("SubBoard");
   },
 };

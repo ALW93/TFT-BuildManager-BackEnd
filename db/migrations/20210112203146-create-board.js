@@ -26,6 +26,9 @@ module.exports = {
         type: Sequelize.JSONB,
         allowNull: false,
       },
+      guide: {
+        type: Sequelize.JSON,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
