@@ -17,6 +17,7 @@ module.exports = {
   production: {
     use_env_variable: "HEROKU_POSTGRESQL_CHARCOAL_URL",
     dialect: "postgres",
+    dialectOptions: { ssl: true },
     seederStorage: "sequelize",
   },
 };
