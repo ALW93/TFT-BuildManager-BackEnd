@@ -2,7 +2,7 @@ const express = require("express");
 const boardRouter = express.Router();
 const { requireAuth } = require("../security");
 const { asyncHandler } = require("../utility");
-const { Board, User, Guide } = require("../../db/models");
+const { Board, User, SubBoard } = require("../../db/models");
 const { Op } = require("sequelize");
 
 function r(o) {
@@ -140,18 +140,7 @@ boardRouter.get(
           },
         },
         {
-          model: Guide,
-          as: "Featured",
-          attributes: {
-            exclude: ["content"],
-          },
-          include: {
-            model: User,
-            as: "Author",
-            attributes: {
-              exclude: ["hashedPassword"],
-            },
-          },
+          model: SubBoard,
         },
       ],
     });
