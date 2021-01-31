@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      guideId: {
+      boardId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },

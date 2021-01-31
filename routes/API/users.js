@@ -4,14 +4,7 @@ const bcrypt = require("bcryptjs");
 const { getUserToken, requireAuth } = require("../security");
 const { check } = require("express-validator");
 const { asyncHandler, handleValidationErrors } = require("../utility");
-const {
-  User,
-  Guide,
-  Comment,
-  Board,
-  Bookmark,
-  Save,
-} = require("../../db/models");
+const { User, Comment, Board, Bookmark } = require("../../db/models");
 const { DateTime } = require("luxon");
 
 //#region  Utilities
@@ -126,54 +119,12 @@ userRouter.get(
           attributes: ["id"],
         },
         {
-          model: Guide,
-          as: "Guides",
-          include: {
-            model: User,
-            as: "Author",
-            attributes: ["username"],
-          },
-        },
-        {
-          model: Guide,
-          as: "Bookmarked",
-          include: {
-            model: User,
-            as: "Author",
-            attributes: ["username"],
-          },
-        },
-        {
           model: Board,
           as: "Boards",
-          include: [
-            {
-              model: Guide,
-              as: "Featured",
-              attributes: ["id"],
-            },
-            {
-              model: User,
-              as: "Saved_By",
-              attributes: ["id"],
-            },
-          ],
         },
         {
           model: Board,
-          as: "Savers",
-          include: [
-            {
-              model: Guide,
-              as: "Featured",
-              attributes: ["id"],
-            },
-            {
-              model: User,
-              as: "Saved_By",
-              attributes: ["id"],
-            },
-          ],
+          as: "Bookmarkers",
         },
         {
           model: Comment,
@@ -195,32 +146,16 @@ userRouter.get(
             followerCount: e.Followers.length,
             followingCount: e.Following.length,
           },
-          guides: (() => {
-            const resObj = {};
-            [...e.Guides, ...e.Bookmarked].forEach((guide) => {
-              resObj[guide.id] = {
-                title: guide.title,
-                votes: guide.votes,
-                lastUpdated: new DateTime(e.createdAt).toLocaleString(
-                  DateTime.DATE_FULL
-                ),
-                authorId: guide.authorId,
-                author: guide.Author.username,
-              };
-            });
-            return resObj;
-          })(),
+
           boards: (() => {
             const resObj = {};
-            [...e.Boards, ...e.Savers].forEach((board) => {
+            [...e.Boards, ...e.Bookmarkers].forEach((board) => {
               resObj[board.id] = {
                 title: board.title,
                 subtitle: board.subtitle,
                 authorId: board.authorId,
                 grid: board.grid,
                 actives: board.actives,
-                feature_count: board.Featured.length,
-                save_count: board.Saved_By.length,
                 cover: board.grid.filter(
                   (e) => e.items && e.items.length === 3
                 ),
@@ -228,7 +163,7 @@ userRouter.get(
             });
             return resObj;
           })(),
-          comments: e.Comments,
+          comments: e.Comment,
         }
       );
       res.status(200).json(resObj);
@@ -241,8 +176,8 @@ userRouter.post(
   "/:id/bookmarks",
   requireAuth,
   asyncHandler(async (req, res) => {
-    const { guideId } = req.body;
-    await Bookmark.create(r({ guideId, followerId: req.params.id }));
+    const { boardId } = req.body;
+    await Bookmark.create(r({ boardId, followerId: req.params.id }));
     res.status(201).send("Bookmark Added!");
   })
 );
@@ -266,10 +201,11 @@ userRouter.delete(
 // *** Add a Board to Collection ***
 userRouter.post(
   "/id/:id/boards",
-  requireAuth,
+
   asyncHandler(async (req, res) => {
     const { boardId } = req.body;
-    await Save.create(r({ boardId: boardId, followerId: req.params.id }));
+    console.log("HITTING THIS", req.params.id);
+    await Bookmark.create(r({ boardId: boardId, followerId: req.params.id }));
     res.status(200).send("Board added to Collection!");
   })
 );
@@ -280,7 +216,7 @@ userRouter.delete(
   requireAuth,
   asyncHandler(async (req, res) => {
     const { boardId } = req.body;
-    await Save.destroy({
+    await Bookmark.destroy({
       where: {
         boardId: boardId,
         followerId: req.params.id,

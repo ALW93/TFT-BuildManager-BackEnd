@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Bookmark = sequelize.define(
     "Bookmark",
     {
-      guideId: DataTypes.INTEGER,
+      boardId: DataTypes.INTEGER,
       followerId: DataTypes.INTEGER,
     },
     {}

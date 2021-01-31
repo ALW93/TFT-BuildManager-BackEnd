@@ -16,18 +16,12 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   User.associate = function (models) {
-    User.hasMany(models.Guide, { foreignKey: "authorId" });
     User.hasMany(models.Board, { foreignKey: "authorId" });
     User.hasMany(models.Comment, { foreignKey: "userId" });
-    User.belongsToMany(models.Board, {
-      as: "Savers",
-      through: "Saves",
-      foreignKey: "followerId",
-    });
 
-    User.belongsToMany(models.Guide, {
-      as: "Bookmarked",
-      through: "Bookmarks",
+    User.belongsToMany(models.Board, {
+      as: "Bookmarkers",
+      through: "Bookmark",
       foreignKey: "followerId",
     });
 

@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      guideId: {
+      boardId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },

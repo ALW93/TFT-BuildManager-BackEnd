@@ -2,7 +2,7 @@ const express = require("express");
 const boardRouter = express.Router();
 const { requireAuth } = require("../security");
 const { asyncHandler } = require("../utility");
-const { Board, User, Guide } = require("../../db/models");
+const { Board, User, SubBoard } = require("../../db/models");
 const { Op } = require("sequelize");
 
 function r(o) {
@@ -10,6 +10,21 @@ function r(o) {
   o.updatedAt = new Date();
   return o;
 }
+
+// *** Function for Sorting Grid by Equipped Total O(n) + O(n log n)***
+const sort = (arr) => {
+  let equipped = [];
+  let empty = [];
+  arr.forEach((e) => {
+    if (e.items) {
+      equipped.push(e);
+    } else {
+      empty.push(e);
+    }
+  });
+  equipped.sort((a, b) => b.items.length - a.items.length);
+  return [...equipped, ...empty];
+};
 
 // *** POST New Board ***
 boardRouter.post(
@@ -48,21 +63,11 @@ boardRouter.get(
       },
       include: [
         {
-          model: Guide,
-          as: "Featured",
-          attributes: ["id"],
-        },
-        {
           model: User,
           as: "Creator",
           attributes: {
             exclude: "hashedPassword",
           },
-        },
-        {
-          model: User,
-          as: "Saved_By",
-          attributes: ["id"],
         },
       ],
     }).then((boards) => {
@@ -72,12 +77,9 @@ boardRouter.get(
           title: board.title,
           subtitle: board.subtitle,
           authorId: board.authorId,
-          grid: board.grid,
+          grid: sort(board.grid),
           actives: board.actives,
           author: board.Creator.username,
-          feature_count: board.Featured.length,
-          save_count: board.Saved_By.length,
-          cover: board.grid.filter((e) => e.items && e.items.length === 3),
         };
       });
 
@@ -96,21 +98,11 @@ boardRouter.get(
       },
       include: [
         {
-          model: Guide,
-          as: "Featured",
-          attributes: ["id"],
-        },
-        {
           model: User,
           as: "Creator",
           attributes: {
             exclude: "hashedPassword",
           },
-        },
-        {
-          model: User,
-          as: "Saved_By",
-          attributes: ["id"],
         },
       ],
     }).then((boards) => {
@@ -120,12 +112,9 @@ boardRouter.get(
           title: board.title,
           subtitle: board.subtitle,
           authorId: board.authorId,
-          grid: board.grid,
+          grid: sort(board.grid),
           actives: board.actives,
           author: board.Creator.username,
-          feature_count: board.Featured.length,
-          save_count: board.Saved_By.length,
-          cover: board.grid.filter((e) => e.items && e.items.length === 3),
         };
       });
       res.status(200).json(resObj);
@@ -151,18 +140,7 @@ boardRouter.get(
           },
         },
         {
-          model: Guide,
-          as: "Featured",
-          attributes: {
-            exclude: ["content"],
-          },
-          include: {
-            model: User,
-            as: "Author",
-            attributes: {
-              exclude: ["hashedPassword"],
-            },
-          },
+          model: SubBoard,
         },
       ],
     });

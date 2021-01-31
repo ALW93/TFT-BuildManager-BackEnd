@@ -1,23 +1,31 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Guide_Boards", {
+    return queryInterface.createTable("SubBoards", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      guideId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
       boardId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      position: {
-        type: Sequelize.INTEGER,
+      title: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      subtitle: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      grid: {
+        type: Sequelize.JSON,
+        allowNull: false,
+      },
+      actives: {
+        type: Sequelize.JSON,
         allowNull: false,
       },
       createdAt: {
@@ -31,6 +39,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("Guide_Boards");
+    return queryInterface.dropTable("SubBoards");
   },
 };
