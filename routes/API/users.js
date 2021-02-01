@@ -171,40 +171,13 @@ userRouter.get(
   })
 );
 
-// *** Add a Bookmark ***
-userRouter.post(
-  "/:id/bookmarks",
-  requireAuth,
-  asyncHandler(async (req, res) => {
-    const { boardId } = req.body;
-    await Bookmark.create(r({ boardId, followerId: req.params.id }));
-    res.status(201).send("Bookmark Added!");
-  })
-);
-
-// *** Remove Bookmark ***
-userRouter.delete(
-  "/:id/bookmarks",
-  requireAuth,
-  asyncHandler(async (req, res) => {
-    const { guideId } = req.body;
-    await Bookmark.destroy({
-      where: {
-        guideId: guideId,
-        followerId: req.params.id,
-      },
-    });
-    res.status(201).send("Bookmark Successfully Removed!");
-  })
-);
-
 // *** Add a Board to Collection ***
 userRouter.post(
   "/id/:id/boards",
 
   asyncHandler(async (req, res) => {
+    console.log("*******REEQUEST", req);
     const { boardId } = req.body;
-    console.log("HITTING THIS", req.params.id);
     await Bookmark.create(r({ boardId: boardId, followerId: req.params.id }));
     res.status(200).send("Board added to Collection!");
   })
@@ -213,7 +186,7 @@ userRouter.post(
 // *** Remove a Board from Collection  ***
 userRouter.delete(
   "/id/:id/boards",
-  requireAuth,
+
   asyncHandler(async (req, res) => {
     const { boardId } = req.body;
     await Bookmark.destroy({

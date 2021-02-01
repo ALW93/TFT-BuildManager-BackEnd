@@ -4,15 +4,17 @@ const app = express();
 const path = require("path");
 const cors = require("cors");
 const bearerToken = require("express-bearer-token");
+const bodyParser = require("body-parser");
 
 const indexRouter = require("./routes/index");
 const userRouter = require("./routes/API/users");
 const boardRouter = require("./routes/API/board");
-const guideRouter = require("./routes/API/guide");
 
 app.use(bearerToken());
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 // Routers
@@ -20,7 +22,6 @@ app.options("/", cors());
 app.use("/", indexRouter);
 app.use("/users", userRouter);
 app.use("/boards", boardRouter);
-app.use("/guides", guideRouter);
 
 app.use(express.static(path.join(__dirname, "public")));
 

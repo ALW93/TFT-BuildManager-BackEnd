@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       authorId: DataTypes.INTEGER,
       actives: DataTypes.JSON,
       subtitle: DataTypes.TEXT,
+      guide: DataTypes.JSON,
     },
     {}
   );
