@@ -36,6 +36,16 @@ boardRouter.post(
   })
 );
 
+// *** POST New SubBoard ***
+boardRouter.post(
+  "/id/:id/subBoard",
+  asyncHandler(async (req, res) => {
+    const newSub = await SubBoard.create(r(req.body));
+    await newSub.save();
+    res.status(201).json({ newSub });
+  })
+);
+
 // *** Retrieve all Boards ***
 boardRouter.get(
   "/",
@@ -148,7 +158,7 @@ boardRouter.get(
   })
 );
 
-// *** Delete a Board
+// *** Delete a Board ***
 boardRouter.delete(
   "/id/:id",
   asyncHandler(async (req, res) => {
