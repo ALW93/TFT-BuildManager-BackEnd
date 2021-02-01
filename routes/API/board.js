@@ -161,4 +161,18 @@ boardRouter.delete(
   })
 );
 
+// *** Add or Edit Guide Column of Board ***
+boardRouter.put(
+  "/id/:id",
+  asyncHandler(async (req, res) => {
+    const { content } = req.body;
+    Board.update(
+      { guide: content },
+      { returning: true, where: { id: req.params.id } }
+    ).then(([update, updatedBoard]) => {
+      res.json(updatedBoard);
+    });
+  })
+);
+
 module.exports = boardRouter;
