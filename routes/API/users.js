@@ -15,6 +15,21 @@ function r(o) {
   return o;
 }
 
+// *** Function for Sorting Grid by Equipped Total O(n) + O(n log n)***
+const sort = (arr) => {
+  let equipped = [];
+  let empty = [];
+  arr.forEach((e) => {
+    if (e.items) {
+      equipped.push(e);
+    } else {
+      empty.push(e);
+    }
+  });
+  equipped.sort((a, b) => b.items.length - a.items.length);
+  return [...equipped, ...empty];
+};
+
 const validateUsername = check("username")
   .exists({ checkFalsy: true })
   .withMessage("Please enter a Username.");
@@ -154,7 +169,7 @@ userRouter.get(
                 title: board.title,
                 subtitle: board.subtitle,
                 authorId: board.authorId,
-                grid: board.grid,
+                grid: sort(board.grid),
                 actives: board.actives,
                 cover: board.grid.filter(
                   (e) => e.items && e.items.length === 3

@@ -154,6 +154,7 @@ boardRouter.get(
         },
       ],
     });
+    data.grid = sort(data.grid);
     res.status(200).json(data);
   })
 );
